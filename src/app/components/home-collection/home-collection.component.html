@@ -88,10 +88,11 @@
         <p class="colLabel fw-bold">Select Delivery Address <br /></p>
         <ng-select
           [items]="deliveryAddressList"
-          bindLabel="name"
+          bindLabel="shortName"
           placeholder="Select Delivery Address..."
           [(ngModel)]="homeCollectionData.selectedDeliveryAddress"
           [addTag]="addCustomUser"
+          (change)="addnewAddress()"
         >
         </ng-select>
       </div>
@@ -107,13 +108,35 @@
         </ng-select>
       </div>
     </div>
-    <div class="row">
+    <div
+      class="row"
+      *ngIf="
+        homeCollectionData.selectedDeliveryAddress &&
+        homeCollectionData.selectedDeliveryAddress.shortName != 'Add New'
+      "
+    >
       <div class="col-sm-4">
         <div class="addressSelected mt-3">
-          <p class="text-end mb-1"><i class="bi bi-pencil-square"></i></p>
-          <p>sdfsdfdsf askdj asdh</p>
-          <p>sdfsdfdsf askdj asdh</p>
-          <p class="m-0">sdfsdfdsfh -34324</p>
+          <p class="text-end mb-1" (click)="editAddress()">
+            <i class="bi bi-pencil-square"></i>
+          </p>
+          <p>
+            {{ homeCollectionData.selectedDeliveryAddress.shortName }}({{
+              homeCollectionData.selectedDeliveryAddress.type
+            }})
+          </p>
+          <p>
+            {{ homeCollectionData.selectedDeliveryAddress.landmark }},{{
+              homeCollectionData.selectedDeliveryAddress.address1
+            }}
+          </p>
+          <p>{{ homeCollectionData.selectedDeliveryAddress.address2 }}</p>
+          <p class="mb-0">
+            {{ homeCollectionData.selectedDeliveryAddress.city }},
+            {{ homeCollectionData.selectedDeliveryAddress.state }}-{{
+              homeCollectionData.selectedDeliveryAddress.pin
+            }}
+          </p>
         </div>
       </div>
     </div>
@@ -464,7 +487,7 @@
           [disabled]="form.invalid"
           type="submit"
           class="btn btn-primary"
-          data-bs-target="#exampleModalToggle2"
+          data-bs-target="#exampleModalToggle"
           data-bs-toggle="modal"
           data-bs-dismiss="modal"
           (click)="onSubmit()"
@@ -475,7 +498,7 @@
           type="button"
           (click)="onReset()"
           class="btn btn-warning float-right"
-          data-bs-target="#exampleModalToggle2"
+          data-bs-target="#exampleModalToggle"
           data-bs-toggle="modal"
           data-bs-dismiss="modal"
         >
@@ -486,3 +509,242 @@
   </div>
 </div>
 <!-- end collection sample modal -->
+
+<!-- addnew address form -->
+<div
+  class="modal fade"
+  id="addNewAddressFormModal"
+  aria-hidden="true"
+  aria-labelledby="addNewAddressFormModalLabel"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNewAddressFormModalLabel">
+          New Address
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="register-form">
+          <form [formGroup]="addressForm" (ngSubmit)="onAddressSubmit()">
+            <div class="form-group">
+              <label>Address Type*</label>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                formControlName="type"
+                class="form-select form-control form-control-sm"
+                [ngClass]="{
+                  'is-invalid': submittedAdd && addf['type'].errors
+                }"
+              >
+                <option value="home">Home</option>
+                <option value="office">Office</option>
+                <option value="other">Other</option>
+              </select>
+              <div
+                *ngIf="submittedAdd && addf['type'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="addf['type'].errors['required']">
+                  type is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Address short Name*</label>
+              <input
+                type="text"
+                formControlName="shortName"
+                class="form-control form-control-sm"
+                [ngClass]="{
+                  'is-invalid': submittedAdd && addf['shortName'].errors
+                }"
+              />
+              <div
+                *ngIf="submittedAdd && addf['shortName'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="addf['shortName'].errors['required']">
+                  Short Name for address is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Address Line 1*</label>
+              <input
+                type="text"
+                formControlName="address1"
+                class="form-control form-control-sm"
+                [ngClass]="{
+                  'is-invalid': submittedAdd && addf['address1'].errors
+                }"
+              />
+              <div
+                *ngIf="submittedAdd && addf['address1'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="addf['address1'].errors['required']">
+                  Address Line 1 is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Address Line 2*</label>
+              <input
+                type="text"
+                formControlName="address2"
+                class="form-control form-control-sm"
+                [ngClass]="{
+                  'is-invalid': submittedAdd && addf['address2'].errors
+                }"
+              />
+              <div
+                *ngIf="submittedAdd && addf['address2'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="addf['address2'].errors['required']">
+                  Address Line 2 is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Landmark*</label>
+              <input
+                type="text"
+                formControlName="landmark"
+                class="form-control form-control-sm"
+                [ngClass]="{
+                  'is-invalid': submittedAdd && addf['landmark'].errors
+                }"
+              />
+              <div
+                *ngIf="submittedAdd && addf['landmark'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="addf['landmark'].errors['required']">
+                  Landmark is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Pin Code*</label>
+              <input
+                type="text"
+                formControlName="pin"
+                class="form-control form-control-sm"
+                [ngClass]="{
+                  'is-invalid': submittedAdd && addf['pin'].errors
+                }"
+              />
+              <div
+                *ngIf="submittedAdd && addf['pin'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="addf['pin'].errors['required']">
+                  Pin is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Area*</label>
+              <input
+                type="text"
+                formControlName="area"
+                class="form-control form-control-sm"
+                [ngClass]="{
+                  'is-invalid': submittedAdd && addf['area'].errors
+                }"
+              />
+              <div
+                *ngIf="submittedAdd && addf['area'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="addf['area'].errors['required']">
+                  Area is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>City*</label>
+              <input
+                type="text"
+                formControlName="city"
+                class="form-control form-control-sm"
+                [ngClass]="{
+                  'is-invalid': submittedAdd && addf['city'].errors
+                }"
+              />
+              <div
+                *ngIf="submittedAdd && addf['city'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="addf['city'].errors['required']">
+                  Address Line 1 is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>State*</label>
+              <input
+                type="text"
+                formControlName="state"
+                class="form-control form-control-sm"
+                [ngClass]="{
+                  'is-invalid': submittedAdd && addf['state'].errors
+                }"
+              />
+              <div
+                *ngIf="submittedAdd && addf['state'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="addf['state'].errors['required']">
+                  Address Line 1 is required
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          [disabled]="addressForm.invalid"
+          type="submit"
+          class="btn btn-primary"
+          data-bs-target="#addNewAddressFormModal"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+          (click)="onAddressSubmit()"
+        >
+          Proceed
+        </button>
+        <!-- <button
+          type="button"
+          class="btn btn-warning float-right"
+          data-bs-target="#addNewAddressFormModal"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<button
+  type="button"
+  data-bs-toggle="modal"
+  href="#addNewAddressFormModal"
+  role="button"
+  #addressModalBtnOpen
+>
+  Launch modal
+</button>
+<!--end addnew address form -->

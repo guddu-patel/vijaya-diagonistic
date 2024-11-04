@@ -1,4 +1,13 @@
-import { Component } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  PLATFORM_ID,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -6,14 +15,14 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import Validation from '../../utils/validation';
-
 @Component({
   selector: 'app-home-collection',
   templateUrl: './home-collection.component.html',
   styleUrl: './home-collection.component.scss',
 })
-export class HomeCollectionComponent {
+export class HomeCollectionComponent implements AfterViewInit {
+  @ViewChild('addressModalBtnOpen', { static: false })
+  openAddModal!: ElementRef;
   doctorList = [
     { id: 1, name: ' Guddu patel' },
     { id: 2, name: 'Anjit misra' },
@@ -44,69 +53,87 @@ export class HomeCollectionComponent {
   deliveryAddressList = [
     {
       id: 1,
-      type: 'Home',
+      type: 'home',
+      shortName: 'Home',
       address1: '23 block road Delhi',
       address2: 'near hadi market opposit sbi bank block road branch',
       landmark: 'main road delhi',
       pin: 500076,
-      are: '',
+      area: '',
       city: 'Delhi',
       state: 'delhi',
     },
     {
       id: 2,
-      type: 'Office',
+      type: 'other',
+      shortName: 'Office',
       address1: '23 block road Delhi',
       address2: 'near hadi market opposit sbi bank block road branch',
       landmark: 'main road delhi',
       pin: 500076,
-      are: '',
+      area: '',
       city: 'Delhi',
       state: 'delhi',
     },
     {
       id: 3,
-      type: 'Juhu beach',
+      type: 'other',
+      shortName: 'Juhu beach',
       address1: '23 block road Delhi',
       address2: 'near hadi market opposit sbi bank block road branch',
       landmark: 'main road delhi',
       pin: 500076,
-      are: '',
+      area: '',
       city: 'Delhi',
       state: 'delhi',
     },
     {
       id: 4,
-      type: 'Jublihills',
+      type: 'office',
+      shortName: 'Jublihills',
       address1: '23 block road Delhi',
       address2: 'near hadi market opposit sbi bank block road branch',
       landmark: 'main road delhi',
       pin: 500076,
-      are: '',
+      area: '',
       city: 'Delhi',
       state: 'delhi',
     },
     {
       id: 5,
-      type: 'kornal place',
+      type: 'office',
+      shortName: 'kornal place',
       address1: '23 block road Delhi',
       address2: 'near hadi market opposit sbi bank block road branch',
       landmark: 'main road delhi',
       pin: 500076,
-      are: '',
+      area: '',
       city: 'Delhi',
       state: 'delhi',
     },
     {
       id: 6,
-      type: 'Infornt mumtaj hotel',
+      type: 'home',
+      shortName: 'Infornt mumtaj hotel',
       address1: '23 block road Delhi',
       address2: 'near hadi market opposit sbi bank block road branch',
       landmark: 'main road delhi',
       pin: 500076,
-      are: '',
+      area: '',
       city: 'Delhi',
       state: 'delhi',
+    },
+    {
+      id: 6,
+      type: 'home',
+      shortName: 'Add New',
+      address1: '',
+      address2: '',
+      landmark: '',
+      pin: '',
+      area: '',
+      city: '',
+      state: '',
     },
   ];
   diagonasticCenterList = [{ id: 1, name: 'Vijaya diagonostic center' }];
@@ -221,7 +248,7 @@ export class HomeCollectionComponent {
       gender: 'female',
     },
   ];
-  homeCollectionData = {
+  homeCollectionData: any = {
     selectedDoctor: null,
     selectedLead: null,
     isb2buser: 'false',
@@ -305,10 +332,17 @@ export class HomeCollectionComponent {
   ];
   selectedPatient: any;
   form: FormGroup;
+  addressForm: FormGroup;
   submitted = false;
   showpatientList = false;
   patientDetail: any;
-  constructor(private formBuilder: FormBuilder) {
+  submittedAdd = false;
+  editAddMode = false;
+  constructor(
+    private formBuilder: FormBuilder,
+    private el: ElementRef,
+    private renderer: Renderer2
+  ) {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -324,9 +358,21 @@ export class HomeCollectionComponent {
       alternateMobile: [''],
       gender: ['male', Validators.required],
     });
+    this.addressForm = this.formBuilder.group({
+      id: [new Date('2017/12/03').valueOf(), Validators.required],
+      type: ['home', Validators.required],
+      shortName: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: ['', Validators.required],
+      landmark: ['', Validators.required],
+      pin: ['', [Validators.required]],
+      area: ['', [Validators.required]],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
@@ -352,7 +398,6 @@ export class HomeCollectionComponent {
   addCustomUser = (term: any) => ({ id: term, name: term });
   checkPatient() {
     const mob = this.form.controls['mobile'];
-    debugger;
     if (mob.valid) {
       this.showpatientList = true;
     } else {
@@ -366,17 +411,72 @@ export class HomeCollectionComponent {
     this.testsSelected.splice(i, 1);
   }
   selectTest(e: any) {
-    debugger;
     if (this.homeCollectionData.selectedTest) {
       const exittest = this.testsSelected.includes(
         this.homeCollectionData.selectedTest
       );
-      debugger;
       !exittest &&
         this.testsSelected.push(this.homeCollectionData.selectedTest);
     }
     setTimeout(() => {
       this.homeCollectionData.selectedTest = null;
     }, 1);
+  }
+  addnewAddress() {
+    this.addressForm = this.formBuilder.group({
+      id: [new Date('2017/12/03').valueOf(), Validators.required],
+      type: ['', Validators.required],
+      shortName: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: ['', Validators.required],
+      landmark: ['', Validators.required],
+      pin: ['', [Validators.required]],
+      area: ['', [Validators.required]],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+    });
+    if (
+      this.homeCollectionData.selectedDeliveryAddress.shortName === 'Add New'
+    ) {
+      this.openAddModal.nativeElement.click();
+    }
+  }
+  get addf(): { [key: string]: AbstractControl } {
+    return this.addressForm.controls;
+  }
+
+  onAddressSubmit() {
+    this.submittedAdd = true;
+
+    if (this.addressForm.invalid) {
+      return;
+    }
+    const newAddadded = { ...this.addressForm.value };
+    if (!this.editAddMode) {
+      this.deliveryAddressList.splice(-2, 1, newAddadded);
+    }
+    setTimeout(() => {
+      this.homeCollectionData.selectedDeliveryAddress = newAddadded;
+    }, 1);
+    this.editAddMode = false;
+  }
+  onResetAddress(): void {
+    setTimeout(() => {
+      this.homeCollectionData.selectedDeliveryAddress = null;
+    }, 1);
+    this.submittedAdd = false;
+    this.addressForm.reset();
+  }
+  editAddress() {
+    this.editAddMode = true;
+    this.addressForm.patchValue(
+      this.homeCollectionData.selectedDeliveryAddress
+    );
+    this.openAddModal.nativeElement.click();
+  }
+  ngAfterViewInit(): void {}
+  onModalClose(): void {
+    // Your logic when the modal is closed
+    console.log('Modal closed');
   }
 }
