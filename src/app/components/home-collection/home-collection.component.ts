@@ -257,6 +257,9 @@ export class HomeCollectionComponent implements AfterViewInit {
     selectedDiagonasticCenter: null,
     remarkRoute: null,
     selectedTest: null,
+    selectedSlot: null,
+    selectedPostSlot: null,
+    selectedCollectionDate: new Date().toISOString().substring(0, 10),
   };
 
   availableTests = [
@@ -330,6 +333,22 @@ export class HomeCollectionComponent implements AfterViewInit {
     // { testName:'Fasting Plasma glucose', price:120,precausion:'Over night fasting',type:'fasting',group:'sugar'},
     // { testName:'Fasting Plasma glucose', price:120,precausion:'Over night fasting',type:'fasting',group:'sugar'}
   ];
+  slotList = [
+    '6:00 - 7:00',
+    '7:00 - 8:00',
+    '8:00 - 9:00',
+    '9:00 - 10:00',
+    '10:00 - 11:00',
+    '11:00 - 12:00',
+    '12:00 - 13:00',
+    '13:00 - 14:00',
+    '14:00 - 15:00',
+    '15:00 - 16:00',
+    '16:00 - 17:00',
+    '17:00 - 18:00',
+    '18:00 - 19:00',
+    '19:00 - 20:00',
+  ];
   selectedPatient: any;
   form: FormGroup;
   addressForm: FormGroup;
@@ -338,6 +357,13 @@ export class HomeCollectionComponent implements AfterViewInit {
   patientDetail: any;
   submittedAdd = false;
   editAddMode = false;
+  spotBookingenabled = false;
+  slotError = false;
+  testCalculationDetail = {
+    totalPrice: 0,
+    haveFastTest: false,
+    havePostTest: false,
+  };
   constructor(
     private formBuilder: FormBuilder,
     private el: ElementRef,
@@ -409,6 +435,7 @@ export class HomeCollectionComponent implements AfterViewInit {
   }
   removeTest(i: number) {
     this.testsSelected.splice(i, 1);
+    this.calculateSum();
   }
   selectTest(e: any) {
     if (this.homeCollectionData.selectedTest) {
@@ -421,11 +448,30 @@ export class HomeCollectionComponent implements AfterViewInit {
     setTimeout(() => {
       this.homeCollectionData.selectedTest = null;
     }, 1);
+    this.calculateSum();
   }
+  calculateSum() {
+    debugger;
+    this.testCalculationDetail = {
+      totalPrice: 0,
+      haveFastTest: false,
+      havePostTest: false,
+    };
+    this.testsSelected.forEach((element: any) => {
+      this.testCalculationDetail.totalPrice += element.price;
+      if (element.type === 'fasting') {
+        this.testCalculationDetail.haveFastTest = true;
+      }
+      if (element.type === 'post') {
+        this.testCalculationDetail.havePostTest = true;
+      }
+    });
+  }
+
   addnewAddress() {
     this.addressForm = this.formBuilder.group({
       id: [new Date('2017/12/03').valueOf(), Validators.required],
-      type: ['', Validators.required],
+      type: ['home', Validators.required],
       shortName: ['', Validators.required],
       address1: ['', Validators.required],
       address2: ['', Validators.required],
@@ -435,6 +481,7 @@ export class HomeCollectionComponent implements AfterViewInit {
       city: ['', Validators.required],
       state: ['', Validators.required],
     });
+    this.editAddMode = false;
     if (
       this.homeCollectionData.selectedDeliveryAddress.shortName === 'Add New'
     ) {
@@ -478,5 +525,17 @@ export class HomeCollectionComponent implements AfterViewInit {
   onModalClose(): void {
     // Your logic when the modal is closed
     console.log('Modal closed');
+  }
+  checkSlotError() {
+    this.slotError = false;
+    if (this.homeCollectionData.selectedSlot) {
+      const fst = +this.homeCollectionData.selectedSlot.split(':')[0].trim();
+      const sst = +this.homeCollectionData.selectedPostSlot
+        .split(':')[0]
+        .trim();
+      if (fst + 2 > sst) {
+        this.slotError = true;
+      }
+    }
   }
 }

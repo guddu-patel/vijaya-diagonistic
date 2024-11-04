@@ -53,3 +53,16 @@
   padding: 15px;
   font-size: 12px;
 }
+.slotContainer {
+  .slotInfo {
+    font-size: 10px;
+  }
+  .slotDate {
+    height: 100%;
+    text-align: center;
+    margin-right: 20px;
+  }
+  .slotTime {
+    margin-left: 20px;
+  }
+}

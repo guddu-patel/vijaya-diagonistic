@@ -150,7 +150,7 @@
       </div>
     </div>
     <div class="row border pt-1 mt-3 mx-0">
-      <div class="col-4">Add Diagonistic Test</div>
+      <div class="col-4 my-auto">Add Diagonistic Test</div>
       <div class="col-4"></div>
       <div class="col-4">
         <!-- <input
@@ -194,11 +194,94 @@
             </tr>
             <tr *ngIf="testsSelected.length === 0">
               <td colspan="5">
-                <p class="text-center m-0">No test Added</p>
+                <p class="text-center m-0">No Test Added</p>
               </td>
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+    <div class="slotContainer mt-3">
+      <h4 class="text-cgreen">Select Slot</h4>
+      <p class="slotInfo">
+        Slot can be booked only for 30 days fron current date(If Available)<span
+          class="text-danger"
+          >*</span
+        >
+      </p>
+      <div class="row mt-3">
+        <div class="col-sm-6 d-flex">
+          <div class="form-group w-50">
+            <input
+              type="date"
+              [(ngModel)]="homeCollectionData.selectedCollectionDate"
+              class="form-control form-control-sm slotDate"
+            />
+          </div>
+          <select
+            class="form-select form-control form-control-sm w-50 slotTime"
+            aria-label="Default select example"
+            [(ngModel)]="homeCollectionData.selectedSlot"
+          >
+            <option *ngFor="let slot of slotList" [value]="slot">
+              {{ slot }}
+            </option>
+          </select>
+        </div>
+        <div class="col-sm-6 d-flex">
+          <button
+            [disabled]="testCalculationDetail.totalPrice <= 0"
+            type="button"
+            class="btn btn-danger rounded-0 me-2 w-50"
+          >
+            Continue({{ testCalculationDetail.totalPrice }})
+          </button>
+          <button
+            (click)="spotBookingenabled = !spotBookingenabled"
+            *ngIf="!spotBookingenabled"
+            type="button"
+            class="btn btn-primary rounded-0 me-2 w-50"
+          >
+            Enable Spot Booking
+          </button>
+          <button
+            (click)="spotBookingenabled = !spotBookingenabled"
+            *ngIf="spotBookingenabled"
+            type="button"
+            class="btn btn-danger rounded-0 me-2 w-50"
+          >
+            Disable Spot Booking
+          </button>
+        </div>
+      </div>
+      <div
+        class="row mt-3"
+        *ngIf="
+          testCalculationDetail.haveFastTest &&
+          testCalculationDetail.havePostTest
+        "
+      >
+        <div class="col-sm-6 d-flex">
+          <div class="form-group w-50 my-auto">
+            <p class="text-cgreen m-0">Select slot for post prendial tests</p>
+          </div>
+          <select
+            class="form-select form-control form-control-sm w-50 slotTime"
+            aria-label="Default select example"
+            [(ngModel)]="homeCollectionData.selectedPostSlot"
+            (change)="checkSlotError()"
+          >
+            <option *ngFor="let slot of slotList" [value]="slot">
+              {{ slot }}
+            </option>
+          </select>
+        </div>
+        <div class="col-sm-6"></div>
+        <div class="col-sm-12">
+          <p *ngIf="slotError" class="mt-3 text-danger">
+            There should be atleast 2 hr. gap for prendial test
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -211,6 +294,8 @@
   aria-hidden="true"
   aria-labelledby="exampleModalToggleLabel"
   tabindex="-1"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -517,12 +602,14 @@
   aria-hidden="true"
   aria-labelledby="addNewAddressFormModalLabel"
   tabindex="-1"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addNewAddressFormModalLabel">
-          New Address
+          {{ editAddMode ? "Update" : "New" }} Address
         </h5>
         <button
           type="button"
@@ -537,10 +624,9 @@
             <div class="form-group">
               <label>Address Type*</label>
               <select
-                class="form-select"
                 aria-label="Default select example"
                 formControlName="type"
-                class="form-select form-control form-control-sm"
+                class="form-select form-control form-control-sm p-1"
                 [ngClass]="{
                   'is-invalid': submittedAdd && addf['type'].errors
                 }"
@@ -744,7 +830,8 @@
   href="#addNewAddressFormModal"
   role="button"
   #addressModalBtnOpen
+  class="d-none"
 >
-  Launch modal
+  Address Modal
 </button>
 <!--end addnew address form -->
