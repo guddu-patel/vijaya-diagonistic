@@ -13,6 +13,11 @@ import { HomeCarouselComponent } from './components/home-carousel/home-carousel.
 import { HomeCollectionComponent } from './components/home-collection/home-collection.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeCollectionSummaryComponent } from './components/home-collection-summary/home-collection-summary.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,13 +26,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RequestCallHeaderComponent,
     HomeCarouselComponent,
     HomeCollectionComponent,
+    HomeCollectionSummaryComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     NgSelectModule,
+    ToastModule,
+    MessageModule,
+    MessagesModule,
   ],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],

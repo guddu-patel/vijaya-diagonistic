@@ -23,6 +23,7 @@ import {
 export class HomeCollectionComponent implements AfterViewInit {
   @ViewChild('addressModalBtnOpen', { static: false })
   openAddModal!: ElementRef;
+  FormMode = true;
   doctorList = [
     { id: 1, name: ' Guddu patel' },
     { id: 2, name: 'Anjit misra' },
@@ -257,8 +258,8 @@ export class HomeCollectionComponent implements AfterViewInit {
     selectedDiagonasticCenter: null,
     remarkRoute: null,
     selectedTest: null,
-    selectedSlot: null,
-    selectedPostSlot: null,
+    selectedSlot: '',
+    selectedPostSlot: '',
     selectedCollectionDate: new Date().toISOString().substring(0, 10),
   };
 
@@ -451,7 +452,6 @@ export class HomeCollectionComponent implements AfterViewInit {
     this.calculateSum();
   }
   calculateSum() {
-    debugger;
     this.testCalculationDetail = {
       totalPrice: 0,
       haveFastTest: false,
@@ -537,5 +537,13 @@ export class HomeCollectionComponent implements AfterViewInit {
         this.slotError = true;
       }
     }
+  }
+  actionFromSummery(e: string) {
+    if (e === 'back') {
+      this.changeFormMode();
+    }
+  }
+  changeFormMode() {
+    this.FormMode = !this.FormMode;
   }
 }

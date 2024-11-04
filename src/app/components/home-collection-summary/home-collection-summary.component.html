@@ -1,0 +1,178 @@
+<div class="container py-3">
+  <h4 class="text-cgreen">Test Summary</h4>
+  <hr />
+  <div class="patientDetailContainer">
+    <div class="row">
+      <div class="col-sm">
+        <p class="colLabel">Patient Detail</p>
+        <p *ngIf="patientDetail">
+          <span class="text-capitalize">{{ patientDetail.title }} </span>
+          <span class="text-uppercase">
+            {{ patientDetail.firstName }} {{ patientDetail.lastName }}</span
+          >
+          ,
+          <span class="text-capitalize">{{ patientDetail.gender }}</span
+          >,
+          <span class="text-capitalize">{{ patientDetail.ageYear }}</span>
+          Years
+          <span class="text-capitalize">{{ patientDetail.ageMonth }}</span>
+          Months
+        </p>
+      </div>
+      <div class="col-sm">
+        <p class="colLabel">Slot Date & Time</p>
+        <p *ngIf="homeCollectionData">
+          {{ homeCollectionData.selectedCollectionDate }}
+          {{ homeCollectionData.selectedSlot }}
+        </p>
+      </div>
+      <div class="col-sm" *ngIf="homeCollectionData.selectedPostSlot">
+        <p class="colLabel">Second Slot Time</p>
+        <p *ngIf="patientDetail">
+          {{ homeCollectionData.selectedCollectionDate }}
+          {{ homeCollectionData.selectedPostSlot }}
+        </p>
+      </div>
+      <div class="col-sm-12 border mt-5 p-0">
+        <table class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Test Name</th>
+              <th scope="col">Original Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let test of testsSelected; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ test.testName }}</td>
+              <td>{{ test.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="mt-2">
+      <button
+        type="button"
+        class="btn btn-primary rounded-0 btn-sm"
+        (click)="openForm()"
+      >
+        BACK
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"></div>
+      <div class="col-sm-6">
+        <div class="mb-3 row smallFont">
+          <label for="staticEmail" class="col-sm-4 col-form-label"
+            >Client</label
+          >
+          <div class="col-sm-8">
+            <select
+              class="form-select form-control form-control-sm"
+              aria-label="Default select example"
+            >
+              <option value="general" selected>General</option>
+              <option value="special">special</option>
+            </select>
+          </div>
+          <p class="col-sm-12 my-2">
+            NOTE: please Upload the required documents
+          </p>
+          <label for="staticEmail" class="col-sm-4 col-form-label"
+            >Document Type</label
+          >
+          <div class="col-sm-8">
+            <select
+              class="form-select form-control form-control-sm"
+              aria-label="Default select example"
+            >
+              <option value="prescription" selected>Select</option>
+              <option value="prescription">Prescription</option>
+              <option value="cerificate">certifical</option>
+              <option value="authcard">Authorization Card</option>
+            </select>
+          </div>
+          <label for="staticEmail" class="col-sm-4 col-form-label mt-2 py-1"
+            >Upload Document
+          </label>
+          <div class="col-sm-8 d-flex mt-2">
+            <input
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+            />
+            <button type="button" class="btn btn-danger btn-sm rounded-0 ms-3">
+              Upload
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4 smallFont">
+      <div class="col-sm-6"></div>
+      <div class="col-sm-6">
+        <div class="row py-2">
+          <div class="col-sm-6">Original Bill Amount</div>
+          <div class="col-sm-6">
+            <i class="bi bi-currency-rupee"></i>
+            {{ testCalculationDetail.totalPrice }}
+          </div>
+        </div>
+        <div class="row py-2">
+          <div class="col-sm-6">Amount After Discount</div>
+          <div class="col-sm-6">
+            <i class="bi bi-currency-rupee"></i>
+            {{ testCalculationDetail.totalPrice }}
+          </div>
+        </div>
+        <div class="row py-2">
+          <div class="col-sm-6">Home Collection Charge</div>
+          <div class="col-sm-6"><i class="bi bi-currency-rupee"></i> 420</div>
+        </div>
+        <div class="row py-2 totalPayable">
+          <div class="col-sm-6">Total Amount Payable</div>
+          <div class="col-sm-6">
+            <i class="bi bi-currency-rupee"></i>
+            {{ testCalculationDetail.totalPrice + 420 }}
+          </div>
+        </div>
+        <div class="row py-2">
+          <div class="col-sm-6">Payment Mode</div>
+          <div class="col-sm-6">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio1"
+                value="cash"
+              />
+              <label class="form-check-label" for="inlineRadio1">Cash</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio2"
+                value="mobile"
+              />
+              <label class="form-check-label" for="inlineRadio2">Mobile</label>
+            </div>
+            <br />
+            <button
+              type="button"
+              class="btn btn-danger btn-sm mt-3 w-100"
+              (click)="submitTest()"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast></p-toast>
