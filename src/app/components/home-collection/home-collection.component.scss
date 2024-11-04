@@ -1,0 +1,55 @@
+@import "../../../custom-variable";
+
+.patientDetailContainer {
+  .colLabel {
+    margin-bottom: 5px;
+  }
+}
+.register-form {
+  .form-group {
+    margin-bottom: 5px;
+    label {
+      margin-bottom: 3px;
+    }
+  }
+}
+.existingPatientList {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   .singlePatient {
+  //     margin: 2px;
+  label.radio {
+    cursor: pointer;
+    padding: 5px;
+    position: relative;
+  }
+  label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  label.radio span {
+    padding: 7px 14px;
+    border: 2px solid #eee;
+    display: inline-block;
+    color: $cgreen;
+    border-radius: 3px;
+    width: 100%;
+  }
+  label.radio input:checked + span {
+    border-color: $cgreen;
+  }
+  .patientCheckIcon {
+    position: absolute;
+    right: 11px;
+    top: 27%;
+  }
+  //   }
+}
+.addressSelected {
+  box-shadow: 0px 9px 17px 5px lightgrey;
+  padding: 15px;
+  font-size: 12px;
+}

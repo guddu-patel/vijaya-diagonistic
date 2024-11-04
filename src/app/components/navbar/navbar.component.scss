@@ -1,0 +1,57 @@
+@import "../../../custom-variable";
+.navbar {
+  height: 77px;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-family: niramit-regular;
+  font-size: 18px;
+  .navbar-nav {
+    .nav-link {
+      color: white;
+      padding: 0 !important;
+      margin: 0 10px;
+
+      &.active,
+      &:hover {
+        color: $cgreen;
+        border-bottom: 3px solid $cgreen;
+      }
+    }
+  }
+  .notiCart {
+    width: 37px;
+    height: 37px;
+    border: 1.5px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    margin: auto 35px auto 0;
+    position: relative;
+    img {
+      margin: auto;
+      // padding: 2px;
+    }
+    .notiCount {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      width: 15px;
+      height: 15px;
+      font-size: 12px;
+      border-radius: 50%;
+      display: flex;
+      span {
+        margin: auto;
+        line-height: 16px;
+      }
+    }
+  }
+  .loginBtn {
+    color: #fff;
+    border-color: #fff;
+    padding: 12px 30px;
+    img {
+      margin-right: 7px;
+      margin-top: -4px;
+    }
+  }
+}

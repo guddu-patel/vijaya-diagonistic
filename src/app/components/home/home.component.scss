@@ -1,0 +1,16 @@
+@import "../../../custom-variable";
+
+.countValue {
+  font-family: naniramit-regular;
+  padding: 15px 130px;
+  h3 {
+    color: $cgreen;
+    font-size: 40px;
+    .count {
+      letter-spacing: 4px;
+    }
+  }
+  p {
+    font-size: 17px;
+  }
+}

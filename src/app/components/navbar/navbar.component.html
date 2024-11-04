@@ -1,0 +1,106 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-cblue text-white">
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="['/']"
+            (click)="activeMenuId = 1"
+            [ngClass]="{ active: activeMenuId === 1 }"
+            >About Us</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            (click)="activeMenuId = 2"
+            [ngClass]="{ active: activeMenuId === 2 }"
+            >Book a Test</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            (click)="activeMenuId = 3"
+            [ngClass]="{ active: activeMenuId === 3 }"
+            >Home Collection</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            (click)="activeMenuId = 4"
+            [ngClass]="{ active: activeMenuId === 4 }"
+            >Health Packages</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            (click)="activeMenuId = 5"
+            [ngClass]="{ active: activeMenuId === 5 }"
+            >Find a Center</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            (click)="activeMenuId = 6"
+            [ngClass]="{ active: activeMenuId === 6 }"
+            >Download Report</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            (click)="activeMenuId = 7"
+            [ngClass]="{ active: activeMenuId === 7 }"
+            >Corporate Wellness</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            (click)="activeMenuId = 8"
+            [ngClass]="{ active: activeMenuId === 8 }"
+            >Investors</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="d-flex" role="search">
+      <div class="notiCart">
+        <img class="cicon" src="assets/icons/cart.png" alt="" />
+        <div class="notiCount bg-cgreen"><span>0</span></div>
+      </div>
+
+      <button
+        class="btn btn-outline-cgreen rounded-pill loginBtn"
+        type="submit"
+      >
+        <img class="cicon" src="assets/icons/user.png" alt="" />
+        Patient log in
+      </button>
+    </div>
+  </div>
+</nav>

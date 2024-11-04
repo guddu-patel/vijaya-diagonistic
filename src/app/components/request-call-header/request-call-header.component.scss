@@ -1,0 +1,70 @@
+@import "../../../custom-variable";
+
+.requestHeader {
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  .logoImg {
+    img {
+      width: 120px;
+    }
+  }
+  .dropSearchContainer {
+    .headSearchdrop {
+      width: 140px;
+      padding-right: 1px;
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      font-size: 16px;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none ' stroke='green' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      color: $cgreen;
+    }
+    .searchIcon {
+      color: #cccccc;
+    }
+    .headSearchInp {
+      width: 317px;
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border-left: none;
+      padding-left: 0;
+      &::placeholder {
+        font-size: 14px;
+        color: $placeHolder;
+      }
+    }
+  }
+  .requestContact {
+    align-self: center;
+    display: flex;
+    .contact {
+      color: #494949;
+      display: flex;
+      align-items: center;
+      .iconBack {
+        width: 32px;
+        height: 32px;
+        padding: 7px;
+        border-radius: 50%;
+        background-color: $cgreen;
+        margin-right: 10px;
+        display: flex;
+        img {
+          margin: auto;
+          width: 18px;
+          height: max-content;
+        }
+      }
+    }
+    .contactText {
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.5s linear, color 0.5s linear;
+    }
+    .contactText:hover {
+      color: $cgreen;
+      border-bottom: 3px solid $cgreen;
+      transition: border-color 0.5s linear, color 0.5s linear;
+      cursor: pointer;
+    }
+  }
+}
