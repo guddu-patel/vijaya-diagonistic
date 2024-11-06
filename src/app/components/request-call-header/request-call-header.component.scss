@@ -51,8 +51,14 @@
         display: flex;
         img {
           margin: auto;
-          width: 18px;
-          height: max-content;
+          width: 15px;
+          height: 15px;
+        }
+        img.iconMail {
+          width: 19px;
+        }
+        .iconCall {
+          animation: tilt-shaking 3s ease infinite;
         }
       }
     }
@@ -66,5 +72,68 @@
       transition: border-color 0.5s linear, color 0.5s linear;
       cursor: pointer;
     }
+  }
+}
+@keyframes tilt-shaking {
+  0% {
+    scale: 100%;
+  }
+  10% {
+    scale: 120%;
+  }
+  15% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(5deg);
+  }
+  32% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-5deg);
+  }
+  35% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(5deg);
+  }
+  45% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  55% {
+    transform: rotate(0deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  65% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(5deg);
+  }
+  85% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(-5deg);
+  }
+  95% {
+    transform: rotate(0deg);
+    scale: 120%;
+  }
+  100% {
+    scale: 100%;
   }
 }

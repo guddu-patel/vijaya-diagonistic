@@ -5,16 +5,31 @@
   padding-right: 25px;
   font-family: niramit-regular;
   font-size: 18px;
+  background: #00000040;
+  z-index: 10;
+  width: 100%;
+  position: absolute;
   .navbar-nav {
     .nav-link {
       color: white;
       padding: 0 !important;
       margin: 0 10px;
-
-      &.active,
+      font-size: 17px;
+      border-bottom: 0 solid transparent;
+      transition: border-bottom 0.3s linear, color 0.3s linear,
+        margin-top 0.3s linear;
+      &.active {
+        color: $cgreen;
+        border-bottom: 3px solid $cgreen;
+        margin-top: -3px;
+        transition: none;
+      }
       &:hover {
         color: $cgreen;
         border-bottom: 3px solid $cgreen;
+        margin-top: -3px;
+        transition: border-bottom 0.3s linear, color 0.3s linear,
+          margin-top 0.3s linear;
       }
     }
   }
