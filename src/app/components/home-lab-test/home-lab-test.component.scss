@@ -22,4 +22,21 @@
   .labTests--diseaseImg {
     height: 100px;
   }
+  .labTests--hexagon {
+    width: 100px;
+    height: 100px; /* Adjust height for a perfect hexagon */
+    background-color: black;
+    clip-path: polygon(
+      25% 6.7%,
+      75% 6.7%,
+      100% 50%,
+      75% 93.3%,
+      25% 93.3%,
+      0% 50%
+    );
+    border: 2px solid red;
+    box-sizing: border-box;
+    transform: rotate(90deg);
+    transition: all 0.4s;
+  }
 }

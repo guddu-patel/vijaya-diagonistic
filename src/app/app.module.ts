@@ -19,6 +19,7 @@ import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeLabTestComponent } from './components/home-lab-test/home-lab-test.component';
+import { AnimatedNumberComponent } from './common-component/animated-number/animated-number.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { HomeLabTestComponent } from './components/home-lab-test/home-lab-test.c
     HomeCollectionComponent,
     HomeCollectionSummaryComponent,
     HomeLabTestComponent,
+    AnimatedNumberComponent,
   ],
   imports: [
     BrowserModule,

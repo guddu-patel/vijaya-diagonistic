@@ -1,16 +1,112 @@
 <app-home-carousel></app-home-carousel>
-<div class="row">
+<div class="row m-0">
   <div class="col-4 countValue">
     <h3><span class="count">123+</span></h3>
     <p>Professionals Radiologists, Pathologists & Microbiologists</p>
   </div>
   <div class="col-4 countValue">
-    <h3><span class="count">00</span> million+</h3>
+    <h3>
+      <span class="count"
+        ><app-animated-number
+          [startValue]="0"
+          [endValue]="100"
+          [duration]="1000"
+        ></app-animated-number
+      ></span>
+      million+
+    </h3>
     <p>Customers and Counting Trusted by Every Age Group</p>
   </div>
   <div class="col-4 countValue">
-    <h3><span class="count">00+</span></h3>
+    <h3>
+      <span class="count"
+        ><app-animated-number
+          [startValue]="0"
+          [endValue]="200"
+          [duration]="1000"
+        ></app-animated-number
+        >+</span
+      >
+    </h3>
     <p>Years of Experience in Delivering Quality Diagnostic Services</p>
+  </div>
+  <div class="popularTestContainer mt-3">
+    <div class="text-center py-4">
+      <p class="text-cgreen bestSerHead">Promising Best Quality Services</p>
+      <h1 class="text-cblue bestSerHead2">Popular Tests</h1>
+      <p class="popTestDes">
+        We have world class pathologists & Lab assistants. We are equipped with
+        best laboratory machinery & reagents. We ensure best quality findings.
+      </p>
+    </div>
+    <div class="testCardContainer row m-0">
+      <div class="col-sm-4 p-3" *ngFor="let test of popularTests">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex testName">
+              <img
+                [src]="'assets/icons/' + test.icon + '.png'"
+                alt=""
+                srcset=""
+              />
+              <h5 class="text-cblue">{{ test.name }}</h5>
+            </div>
+            <p class="text-cgrey my-2">No special preparation is required</p>
+            <p class="m-0">
+              <span class="originalPrice"
+                ><i class="bi bi-currency-rupee"></i
+                >{{ test.originalPrice }}</span
+              >
+              <span class="offerPrice"
+                ><i class="bi bi-currency-rupee"></i>{{ test.offerPrice }}</span
+              >
+            </p>
+          </div>
+          <div class="dicountTag">{{ test.discount }}% OFF</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <button type="button" class="btn btn-cgreen btn-lg viewAllBtn">
+    View All
+  </button>
+</div>
+<div class="ourHelthCheckupsContainer">
+  <div class="backOurHelthBlue">
+    <div class="shodowDiv"></div>
+    <div class="hexaGonalContainer">
+      <img src="assets/img/hex2mov.png" alt="" srcset="" />
+      <!-- <div class="hexagon hexa1"></div>
+      <div class="hexagon hexa2"></div> -->
+    </div>
+  </div>
+  <div class="backOurHelthwhite"></div>
+  <div class="heltCheckupData">
+    <div class="ourHealthHead">
+      <p>High Performance Laboratory Services</p>
+      <h3>Our Health Checkups</h3>
+      <p class="smallDes">
+        Our mission is to provide the highest standard of clinical laboratory
+        service to physicians, clinics, hospitals, and health care providers.
+      </p>
+    </div>
+    <div class="heltCheckupPills">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item" *ngFor="let pill of pills">
+          <a
+            class="nav-link"
+            aria-current="page"
+            [ngClass]="{ active: pill === activePill }"
+            (click)="activePill = pill"
+            >{{ pill }}</a
+          >
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 <app-home-lab-test></app-home-lab-test>
+<div class="mb-5"></div>
