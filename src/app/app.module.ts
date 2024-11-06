@@ -18,6 +18,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeLabTestComponent } from './components/home-lab-test/home-lab-test.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeCarouselComponent,
     HomeCollectionComponent,
     HomeCollectionSummaryComponent,
+    HomeLabTestComponent,
   ],
   imports: [
     BrowserModule,
