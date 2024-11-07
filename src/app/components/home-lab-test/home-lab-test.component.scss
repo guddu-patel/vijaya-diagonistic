@@ -22,10 +22,10 @@
   .labTests--diseaseImg {
     height: 100px;
   }
-  .labTests--hexagon {
-    width: 100px;
-    height: 100px; /* Adjust height for a perfect hexagon */
-    background-color: black;
+  .labTests--hexagonWrapper {
+    display: inline-block;
+    padding: 4px; /* Padding acts as border thickness */
+    background-color: #6f7f90; /* Color for the border */
     clip-path: polygon(
       25% 6.7%,
       75% 6.7%,
@@ -34,9 +34,82 @@
       25% 93.3%,
       0% 50%
     );
-    border: 2px solid red;
-    box-sizing: border-box;
     transform: rotate(90deg);
-    transition: all 0.4s;
+    border-radius: 10px;
+  }
+
+  .labTests--hexagon {
+    width: 110px; /* Slightly smaller than wrapper to fit inside */
+    height: 100px; /* Adjust height proportionally */
+    background-color: #fff; /* Hexagon background color */
+    clip-path: polygon(
+      25% 6.7%,
+      75% 6.7%,
+      100% 50%,
+      75% 93.3%,
+      25% 93.3%,
+      0% 50%
+    );
+    border-radius: 10px;
+  }
+  li:hover {
+    .labTests--hexagonWrapper {
+      background-color: #0ab7b0;
+      .labTests--hexagon {
+        background-color: #0ab7b0;
+      }
+    }
+    .labTests--diseaseImg-hover {
+      filter: brightness(0) invert(1); /* Makes image appear white */
+    }
+  }
+  .labTests--diseaseImg-hover {
+    transition: filter 0.3s ease; /* Smooth transition */
+    height: 53px;
+    width: auto;
+    position: absolute;
+    top: 25px;
+    left: 11px;
+    z-index: 1;
+  }
+
+  .labTests--diseaseImg-hover:hover {
+    filter: brightness(0) invert(1); /* Makes image appear white */
+  }
+  .labTests--diseaseHexagonImg {
+    height: 100px;
+  }
+  .labTests--imageWrapper {
+    position: relative;
+  }
+  .labTests--imageWrapper:hover {
+    clip-path: polygon(
+      25% 6.7%,
+      75% 6.7%,
+      100% 50%,
+      75% 93.3%,
+      25% 93.3%,
+      0% 50%
+    );
+  }
+  .labTests--imageWrapper::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0ab7b0; /* Overlay color */
+    opacity: 0; /* Initially invisible */
+    transition: opacity 0.3s ease; /* Smooth transition */
+    content: "";
+  }
+
+  /* Show overlay on hover */
+  .labTests--imageWrapper:hover::after {
+    opacity: 1; /* Adjust opacity as needed */
+  }
+  li {
+    position: relative;
+    display: inline-block;
   }
 }
