@@ -141,21 +141,6 @@
       img {
         width: 120px;
       }
-
-      // .hexagon {
-      //   height: 80px; /* adjust to control the size  */
-      //   aspect-ratio: cos(30deg);
-      //   clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
-      //   background: #3b8686;
-      //   border-radius: 10px;
-      //   &.hexa1 {
-      //     background: #ecfffb80;
-      //     margin: 0 0 ;
-      //   }
-      //   &.hexa2 {
-      //     background: #bee4ef40;
-      //   }
-      // }
     }
   }
   .backOurHelthwhite {
@@ -311,6 +296,28 @@
       &.active {
         background: #0AB7B0;
         color: white;
+      }
+    }
+  }
+}
+.healthCheckupCardContainer {
+  .back {
+    background: linear-gradient(56.91deg, #3f4596 20.32%, #ff452b 98.14%);
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    box-shadow: 0px 1px 10px 0px #6f7f9099;
+
+    .healthCard {
+      background: white;
+      border-bottom-right-radius: 20px;
+    }
+    .healthCard:hover {
+      svg path {
+        fill: $cgreen;
+        fill-opacity: 1;
+      }
+      image {
+        filter: brightness(0) invert(1);
       }
     }
   }
