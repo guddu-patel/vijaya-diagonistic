@@ -69,3 +69,31 @@
 .mt-7 {
   margin-top: 100px;
 }
+.patientDetails1 {
+  .form-control:focus {
+    border-color: rgb(10, 183, 176);
+    box-shadow: none;
+  }
+
+  .form-floating > .form-control:focus ~ label,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: rgb(10, 183, 176);
+  }
+  .form-control {
+    height: 45px;
+  }
+}
+.patientDetail2 {
+  label {
+    color: rgb(10, 183, 176);
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .form-control:focus {
+    border-color: rgb(10, 183, 176);
+    box-shadow: none;
+  }
+  .form-control {
+    height: 45px;
+  }
+}
