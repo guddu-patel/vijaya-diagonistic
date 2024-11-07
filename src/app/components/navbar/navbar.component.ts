@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   activeMenuId = 1;
+  isOtherPage = 1;
   constructor() {}
 }
