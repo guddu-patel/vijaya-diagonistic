@@ -107,4 +107,43 @@
     </div>
   </div>
 </div>
-<div class="mb-5"></div>
+<div class="mb-5">
+  <span class="upper-image"></span>
+  <div class="middle-image d-flex">
+   <img src="assets/img/googleRating.png" alt="" class="google-rating">
+   <div class="mt-5" >
+    <span class="versatile-text">Versatile Laboratory Service Provider</span>
+    <h3> Vijaya Diagnostic Provides the best laboratory experience </h3>
+    <p>At Vijaya Diagnostic Center, we provide a wide range of diagnostic services ranging from complete health check-up packages for citizens & corporates to super-specialty tests like Oncology, Neurology, Gynecology, Nephrology and many more.</p>
+    <div class="versatile-provider">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item" *ngFor="let tab of tabs">
+          <a
+            class="nav-link"
+            aria-current="page"
+            [ngClass]="{ active: tab === activeTab }"
+            (click)="activeTab = tab"
+            >{{ tab }}</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li>
+          hi
+        </li>
+        <li>
+          hi
+        </li>
+      </ul>
+    </div>
+    <div class="text-center">
+      <button type="button" class="btn btn-cgreen btn-lg viewAllBtn">
+        View All
+      </button>
+    </div>
+   </div>
+  </div>
+  <span class="lower-image"></span>
+</div>

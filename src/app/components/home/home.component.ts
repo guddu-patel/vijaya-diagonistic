@@ -57,5 +57,11 @@ export class HomeComponent {
     'Offers',
     'Gynaecology Packes',
   ];
+  tabs=[
+    'Laboratory Services',
+    'Radiology Services',
+    'Advanced Radiology Services'
+  ]
   activePill = this.pills[0];
+  activeTab=this.tabs[0]
 }
