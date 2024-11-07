@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light text-white">
+<nav
+  class="navbar navbar-expand-lg navbar-light text-white"
+  [ngClass]="{ otherPage: isOtherPage }"
+>
   <div class="container-fluid">
     <button
       class="navbar-toggler"
