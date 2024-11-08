@@ -63,20 +63,6 @@
     margin-left: 20px;
   }
 }
-.patientDetails1 {
-  .form-control:focus {
-    border-color: rgb(10, 183, 176);
-    box-shadow: none;
-  }
-
-  .form-floating > .form-control:focus ~ label,
-  .form-floating > .form-control:not(:placeholder-shown) ~ label {
-    color: rgb(10, 183, 176);
-  }
-  .form-control {
-    height: 45px;
-  }
-}
 .homeCollection--heading {
   font-weight: 600;
 }
