@@ -101,6 +101,7 @@
                       bindLabel="name"
                       placeholder="Select Doctor..."
                       [(ngModel)]="homeCollectionData.selectedDoctor"
+                      [ngModelOptions]="{ standalone: true }"
                       [addTag]="addCustomUser"
                     >
                     </ng-select>
@@ -189,6 +190,7 @@
             bindLabel="name"
             placeholder="Select Doctor..."
             [(ngModel)]="homeCollectionData.selectedDoctor"
+            [ngModelOptions]="{ standalone: true }"
             [addTag]="addCustomUser"
           >
           </ng-select>
@@ -200,6 +202,7 @@
             bindLabel="name"
             placeholder="Select Lead Source..."
             [(ngModel)]="homeCollectionData.selectedLead"
+            [ngModelOptions]="{ standalone: true }"
           >
           </ng-select>
         </div>
@@ -279,6 +282,7 @@
               id="inlineRadio1"
               value="true"
               [(ngModel)]="homeCollectionData.isb2buser"
+              [ngModelOptions]="{ standalone: true }"
             />
             <label class="form-check-label" for="inlineRadio1">True</label>
           </div>
@@ -290,6 +294,7 @@
               id="inlineRadio2"
               value="false"
               [(ngModel)]="homeCollectionData.isb2buser"
+              [ngModelOptions]="{ standalone: true }"
             />
             <label class="form-check-label" for="inlineRadio2">False</label>
           </div>
@@ -301,6 +306,7 @@
             bindLabel="name"
             placeholder="Select client..."
             [(ngModel)]="homeCollectionData.selectedClient"
+            [ngModelOptions]="{ standalone: true }"
             [addTag]="addCustomUser"
           >
           </ng-select>
@@ -314,6 +320,7 @@
             bindLabel="shortName"
             placeholder="Select Delivery Address..."
             [(ngModel)]="homeCollectionData.selectedDeliveryAddress"
+            [ngModelOptions]="{ standalone: true }"
             [addTag]="addCustomUser"
             (change)="addnewAddress()"
           >
@@ -329,6 +336,7 @@
             bindLabel="name"
             placeholder="Select Center..."
             [(ngModel)]="homeCollectionData.selectedDiagonasticCenter"
+            [ngModelOptions]="{ standalone: true }"
             [addTag]="addCustomUser"
           >
           </ng-select>
@@ -372,6 +380,7 @@
             class="form-control"
             placeholder="Please add remarks/route if any..."
             [(ngModel)]="homeCollectionData.remarkRoute"
+            [ngModelOptions]="{ standalone: true }"
           ></textarea>
         </div>
       </div>
@@ -386,12 +395,13 @@
           aria-label=".form-control-sm example"
         /> -->
           <ng-select
-            [disabled]="!homeCollectionData.selectedDiagonasticCenter"
             [items]="availableTests"
             bindLabel="testName"
             placeholder="Select Test..."
             [(ngModel)]="homeCollectionData.selectedTest"
+            [ngModelOptions]="{ standalone: true }"
             (change)="selectTest($event)"
+            class="form-control"
           >
           </ng-select>
         </div>
@@ -440,6 +450,7 @@
               <input
                 type="date"
                 [(ngModel)]="homeCollectionData.selectedCollectionDate"
+                [ngModelOptions]="{ standalone: true }"
                 class="form-control form-control-sm slotDate"
               />
             </div>
@@ -447,6 +458,7 @@
               class="form-select form-control form-control-sm w-50 slotTime"
               aria-label="Default select example"
               [(ngModel)]="homeCollectionData.selectedSlot"
+              [ngModelOptions]="{ standalone: true }"
               [ariaPlaceholder]="'Select Slot'"
             >
               <option *ngIf="!spotBookingenabled" value="" selected disabled>
@@ -504,6 +516,7 @@
               class="form-select form-control form-control-sm w-50 slotTime"
               aria-label="Default select example"
               [(ngModel)]="homeCollectionData.selectedPostSlot"
+              [ngModelOptions]="{ standalone: true }"
               (change)="checkSlotError()"
             >
               <option *ngIf="!spotBookingenabled" value="" selected disabled>
@@ -555,19 +568,10 @@
         </div>
         <div class="modal-body">
           <div class="register-form">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form1" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <label>Mobile number*</label>
 
-                <!-- <ng-select
-                [items]="patientSourceList"
-                bindLabel="name"
-                placeholder="Enter Mobile Number..."
-                [(ngModel)]="selectedPatient"
-                formControlName="mobile"
-                [addTag]="addCustomUser"
-              >
-              </ng-select> -->
                 <input
                   type="number"
                   formControlName="mobile"
@@ -662,7 +666,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label>First Name*</label>
                 <input
                   type="text"
@@ -680,7 +684,7 @@
                     First Name is required
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="form-group">
                 <label>Last Name</label>
                 <input

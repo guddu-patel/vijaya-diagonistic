@@ -369,12 +369,31 @@ export class HomeCollectionComponent implements AfterViewInit {
     haveFastTest: false,
     havePostTest: false,
   };
+  form1: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     private el: ElementRef,
     private renderer: Renderer2
   ) {
     this.form = this.formBuilder.group({
+      title: ['', Validators.required],
+      fullName: [''],
+      firstName: ['', Validators.required],
+      lastName: [''],
+      lastVisitDate: [''],
+      ageYear: ['', Validators.required],
+      ageMonth: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      mobile: [
+        '',
+        [Validators.required, Validators.pattern('^[- +()0-9]{10,12}$')],
+      ],
+      alternateMobile: [''],
+      gender: ['male', Validators.required],
+      dob: [],
+      age: [{ value: '', disabled: true }],
+    });
+    this.form1 = this.formBuilder.group({
       title: ['', Validators.required],
       fullName: [''],
       firstName: ['', Validators.required],
