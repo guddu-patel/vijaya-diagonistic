@@ -24,6 +24,8 @@ export class HomeCollectionComponent implements AfterViewInit {
   @ViewChild('addressModalBtnOpen', { static: false })
   openAddModal!: ElementRef;
   FormMode = true;
+  todayDate = new Date();
+
   doctorList = [
     { id: 1, name: ' Guddu patel' },
     { id: 2, name: 'Anjit misra' },
@@ -141,7 +143,7 @@ export class HomeCollectionComponent implements AfterViewInit {
   patientSourceList = [
     {
       id: 1,
-      title: 'mr.',
+      title: 'mrs.',
       firstName: 'Ranjeeta',
       lastName: 'Arora',
       lastVisitDate: null,
@@ -151,6 +153,8 @@ export class HomeCollectionComponent implements AfterViewInit {
       alternateMobile: '1234123412',
       gender: 'female',
       belongTo: 'self',
+      fullName: 'Mrs. Ranjeeta Arora',
+      dob: '1992-06-06',
     },
     {
       id: 2,
@@ -372,6 +376,7 @@ export class HomeCollectionComponent implements AfterViewInit {
   ) {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
+      fullName: [''],
       firstName: ['', Validators.required],
       lastName: [''],
       lastVisitDate: [''],
@@ -384,6 +389,8 @@ export class HomeCollectionComponent implements AfterViewInit {
       ],
       alternateMobile: [''],
       gender: ['male', Validators.required],
+      dob: [],
+      age: [{ value: '', disabled: true }],
     });
     this.addressForm = this.formBuilder.group({
       id: [new Date('2017/12/03').valueOf(), Validators.required],
@@ -425,10 +432,50 @@ export class HomeCollectionComponent implements AfterViewInit {
   addCustomUser = (term: any) => ({ id: term, name: term });
   checkPatient() {
     const mob = this.form.controls['mobile'];
+    this.selectedPatient = null;
     if (mob.valid) {
       this.showpatientList = true;
+      this.selectedPatient = this.patientSourceList[0];
+      setTimeout(() => {
+        this.showpatientList = false;
+        this.updateFormData();
+        this.calculateAge();
+      }, 1000);
     } else {
       this.showpatientList = false;
+    }
+  }
+  calculateAge() {
+    const dob = this.form.value.dob;
+    if (dob) {
+      const birthDate = new Date(dob);
+      const currentDate = this.todayDate;
+      let years = currentDate.getFullYear() - birthDate.getFullYear();
+      let months = currentDate.getMonth() - birthDate.getMonth();
+      let days = currentDate.getDate() - birthDate.getDate();
+
+      if (days < 0) {
+        months--;
+        let previousMonth = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          0
+        );
+        days = previousMonth.getDate() + days;
+      }
+
+      if (months < 0) {
+        years--;
+        months = 12 + months;
+      }
+      this.form.patchValue({
+        ageYear: years,
+        ageMonth: months,
+        age: `${years} years ${months} months`,
+      });
+      // this.item.ageYears = years;
+      // this.item.ageMonths = months;
+      // this.item.ageDays = days;
     }
   }
   updateFormData() {
