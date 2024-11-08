@@ -8,9 +8,6 @@
 .register-form {
   .form-group {
     margin-bottom: 5px;
-    label {
-      margin-bottom: 3px;
-    }
   }
 }
 .existingPatientList {
@@ -83,33 +80,33 @@
 .homeCollection--heading {
   font-weight: 600;
 }
-.patientDetail,
-.patientDetail2 {
-  h4 {
-    font-weight: 600;
-  }
-  label {
-    color: rgb(10, 183, 176);
-    font-weight: 600;
-    font-size: 15px;
-  }
-  .form-control:focus {
-    border-color: rgb(10, 183, 176);
-    box-shadow: none;
-  }
-  input.form-control {
-    height: 45px;
-  }
-  textarea.form-control {
-    min-height: 100px;
-  }
-  .form-check-input:checked {
-    background-color: rgb(10, 183, 176);
-    border-color: rgb(10, 183, 176);
-  }
-  .form-check-input:focus {
-    box-shadow: 0 0 0 0.25rem rgb(10, 183, 176, 0.25);
-  }
+h4 {
+  font-weight: 600;
+}
+label {
+  color: rgb(10, 183, 176);
+  font-weight: 600;
+  font-size: 15px;
+}
+.form-control:focus {
+  border-color: rgb(10, 183, 176);
+  box-shadow: none;
+}
+input.form-control,
+select.form-control {
+  height: 45px;
+}
+textarea.form-control {
+  min-height: 100px;
+}
+.form-check-input:checked {
+  background-color: rgb(10, 183, 176);
+  border-color: rgb(10, 183, 176);
+}
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgb(10, 183, 176, 0.25);
+}
+.patientDetail {
   .bookingDetails--addressLabel {
     color: rgb(33, 37, 41);
     position: relative;
@@ -142,7 +139,7 @@
   }
 }
 ::ng-deep {
-  .patientDetail .ng-select.ng-select-single .ng-select-container {
+  .ng-select.ng-select-single .ng-select-container {
     height: 45px;
   }
 }
@@ -165,5 +162,11 @@
   }
   .input-group-text {
     background: transparent;
+  }
+}
+#addNewAddressFormModal {
+  .modal-header {
+    border-color: rgb(10, 183, 176);
+    padding: 16px 30px;
   }
 }
