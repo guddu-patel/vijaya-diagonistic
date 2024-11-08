@@ -97,13 +97,24 @@
         <div class="notiCount bg-cgreen"><span>0</span></div>
       </div>
 
-      <button
-        class="btn btn-outline-cgreen rounded-pill loginBtn"
-        type="submit"
-      >
-        <img class="cicon" src="assets/icons/user.png" alt="" />
-        log in
-      </button>
+      <div *ngIf="isOtherPage; else profileCard">
+        <div class="profile-card">
+          <div><img src="assets/img/icon-profile.png" alt="" /></div>
+          <div class="profile-details">
+            <strong>Ahmad Kamal</strong>
+            <span>Collection Executive</span>
+          </div>
+        </div>
+      </div>
+      <ng-template #profileCard>
+        <button
+          class="btn btn-outline-cgreen rounded-pill loginBtn"
+          type="submit"
+        >
+          <img class="cicon" src="assets/icons/user.png" alt="" />
+          log in
+        </button>
+      </ng-template>
     </div>
   </div>
 </nav>
