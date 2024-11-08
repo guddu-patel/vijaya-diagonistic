@@ -27,11 +27,11 @@ export class HomeCollectionComponent implements AfterViewInit {
   todayDate = new Date();
 
   doctorList = [
-    { id: 1, name: ' Guddu patel' },
-    { id: 2, name: 'Anjit misra' },
-    { id: 3, name: 'Rajan chaudhary' },
-    { id: 4, name: 'Sagar kurmi' },
-    { id: 5, name: 'Arun kumar jha' },
+    { id: 1, name: 'Dr. SK patel' },
+    { id: 2, name: 'Dr. Anjit misra' },
+    { id: 3, name: 'Dr. Rajan chaudhary' },
+    { id: 4, name: 'Dr. Sagar kurmi' },
+    { id: 5, name: 'Dr. Arun kumar jha' },
     { id: 5, name: 'Dr. Self' },
   ];
   clientList = [
@@ -163,6 +163,9 @@ export class HomeCollectionComponent implements AfterViewInit {
         city: 'Hyderabad',
         state: 'Telangana',
         pin: '500020',
+        type: 'home',
+        landmark: '',
+        area: '',
       },
       fullAddress:
         '379/A, Krishna Nagar Colony, Bholakpur, Sicundrabad, HYD Telangana, Hyderabad 500020',
@@ -189,6 +192,9 @@ export class HomeCollectionComponent implements AfterViewInit {
         city: 'Hyderabad',
         state: 'Telangana',
         pin: '500020',
+        type: 'home',
+        landmark: '',
+        area: '',
       },
       fullAddress:
         'D 105, Jalvayu tower, Tankbund Road, Kavadiguda, Opp. sai baba temple, Hyderabad 500020',
@@ -215,6 +221,9 @@ export class HomeCollectionComponent implements AfterViewInit {
         city: 'Hyderabad',
         state: 'Telangana',
         pin: '500020',
+        type: 'home',
+        landmark: '',
+        area: '',
       },
       fullAddress:
         '36 Road no. 04, Saifabad Road, Opp. to Chroma Store, Hydrabad - 500020',
@@ -304,6 +313,7 @@ export class HomeCollectionComponent implements AfterViewInit {
     selectedSlot: '',
     selectedPostSlot: '',
     selectedCollectionDate: new Date().toISOString().substring(0, 10),
+    sameAsParmanentAdd: false,
   };
 
   availableTests = [
@@ -371,20 +381,20 @@ export class HomeCollectionComponent implements AfterViewInit {
     // { testName:'Fasting Plasma glucose', price:120,precausion:'Over night fasting',type:'fasting',group:'sugar'}
   ];
   slotList = [
-    '6:00 - 7:00',
-    '7:00 - 8:00',
-    '8:00 - 9:00',
-    '9:00 - 10:00',
-    '10:00 - 11:00',
-    '11:00 - 12:00',
-    '12:00 - 13:00',
-    '13:00 - 14:00',
-    '14:00 - 15:00',
-    '15:00 - 16:00',
-    '16:00 - 17:00',
-    '17:00 - 18:00',
-    '18:00 - 19:00',
-    '19:00 - 20:00',
+    '6:00 - 6:30',
+    '6:30 - 7:00',
+    '7:00 - 7:30',
+    '7:30 - 8:00',
+    '8:00 - 8:30',
+    '8:30 - 9:00',
+    '9:00 - 9:30',
+    '9:30 - 10:00',
+    '10:00 - 10:30',
+    '10:30 - 11:00',
+    '11:00 - 11:30',
+    '11:30 - 12:00',
+    '12:00 - 12:30',
+    '12:30 - 13:00',
   ];
   selectedPatient: any;
   form: FormGroup;
@@ -487,16 +497,20 @@ export class HomeCollectionComponent implements AfterViewInit {
     this.selectedPatient = null;
     if (mob.valid) {
       this.showpatientList = true;
-      this.selectedPatient = this.patientSourceList.filter((item) => {
-        return item.mobile === this.form.value.mobile;
-      })[0];
+      this.selectedPatient =
+        this.patientSourceList.filter((item) => {
+          return item.mobile === this.form.value.mobile;
+        })[0] || null;
       setTimeout(() => {
         this.showpatientList = false;
         this.updateFormData();
         this.calculateAge();
+        this.homeCollectionData.sameAsParmanentAdd = true;
+        this.prefillParmanentAdd();
       }, 1000);
     } else {
       this.showpatientList = false;
+      this.homeCollectionData.selectedDeliveryAddress = null;
     }
   }
   calculateAge() {
@@ -646,5 +660,23 @@ export class HomeCollectionComponent implements AfterViewInit {
   }
   changeFormMode() {
     this.FormMode = !this.FormMode;
+  }
+  toggleSpotBooking() {
+    this.spotBookingenabled = !this.spotBookingenabled;
+    if (this.spotBookingenabled) {
+      this.homeCollectionData.selectedSlot = '9:00 - 9:30';
+    } else {
+      setTimeout(() => {
+        this.homeCollectionData.selectedSlot = '';
+      }, 1);
+    }
+  }
+  prefillParmanentAdd() {
+    if (this.homeCollectionData.sameAsParmanentAdd) {
+      this.homeCollectionData.selectedDeliveryAddress =
+        this.selectedPatient.address;
+    } else {
+      this.homeCollectionData.selectedDeliveryAddress = null;
+    }
   }
 }

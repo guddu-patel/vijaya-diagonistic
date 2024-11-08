@@ -75,6 +75,7 @@
                   class="form-control"
                   id="patientDetailInput5"
                   placeholder="Enter Address"
+                  formControlName="fullAddress"
                 />
               </div>
               <div class="mb-3">
@@ -125,13 +126,16 @@
                       <label class="form-check-label form-label"
                         >Home Collection Address</label
                       >
-                      <div class="form-check">
+                      <div class="form-check" *ngIf="selectedPatient">
                         <input
                           class="form-check-input"
                           type="checkbox"
                           value=""
                           id="defaultCheck1"
-                          checked="checked"
+                          [checked]="homeCollectionData.sameAsParmanentAdd"
+                          [(ngModel)]="homeCollectionData.sameAsParmanentAdd"
+                          (change)="prefillParmanentAdd()"
+                          [ngModelOptions]="{ standalone: true }"
                         />
                         <label
                           class="form-check-label bookingDetails--addressLabel"
@@ -141,13 +145,44 @@
                         </label>
                       </div>
                     </div>
-                    <div class="mb-3">
+                    <div
+                      class="mb-3"
+                      *ngIf="homeCollectionData.selectedDeliveryAddress"
+                    >
                       <div class="card" style="width: 18rem">
                         <div class="card-body">
-                          <p class="card-text">244/52, Ashoka Enclave</p>
-                          <p class="card-text">Sector 121</p>
-                          <p class="card-text">Noida Greater Expressway</p>
-                          <p class="card-text">Noida, Uttar Pradesh, 201301</p>
+                          <p class="card-text">
+                            ({{
+                              homeCollectionData.selectedDeliveryAddress.type
+                            }})
+                          </p>
+                          <p class="card-text">
+                            {{
+                              homeCollectionData.selectedDeliveryAddress
+                                .address1
+                            }}
+                          </p>
+                          <p class="card-text">
+                            {{
+                              homeCollectionData.selectedDeliveryAddress
+                                .address2
+                            }}
+                          </p>
+                          <p class="card-text">
+                            {{
+                              homeCollectionData.selectedDeliveryAddress
+                                .citycode
+                            }}{{
+                              homeCollectionData.selectedDeliveryAddress.city
+                            }}
+                          </p>
+                          <p class="card-text">
+                            {{
+                              homeCollectionData.selectedDeliveryAddress.state
+                            }},{{
+                              homeCollectionData.selectedDeliveryAddress.pin
+                            }}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -206,6 +241,7 @@
                     data-bs-placement="top"
                     title="Remove Test"
                     class="bi bi-x-circle-fill text-danger"
+                    role="button"
                     (click)="removeTest(i)"
                   ></i>
                 </td>
@@ -222,7 +258,7 @@
       <div class="slotContainer mt-3">
         <h4 class="text-cgreen">Select Slot</h4>
         <p class="slotInfo">
-          Slot can be booked only for 30 days fron current date(If
+          Slot can be booked only for 30 days from current date(If
           Available)<span class="text-danger">*</span>
         </p>
         <div class="row mt-3">
@@ -259,13 +295,13 @@
             <button
               [disabled]="testCalculationDetail.totalPrice <= 0"
               type="button"
-              class="btn btn-danger rounded-0 me-2 w-50"
+              class="btn btn-cgreen rounded-0 me-2 w-50"
               (click)="changeFormMode()"
             >
               Continue({{ testCalculationDetail.totalPrice }})
             </button>
             <button
-              (click)="spotBookingenabled = !spotBookingenabled"
+              (click)="toggleSpotBooking()"
               *ngIf="!spotBookingenabled"
               type="button"
               class="btn btn-primary rounded-0 me-2 w-50"
