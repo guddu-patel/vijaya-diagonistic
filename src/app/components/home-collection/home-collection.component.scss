@@ -80,10 +80,14 @@
     height: 45px;
   }
 }
+.patientDetail,
 .patientDetail2 {
+  h4 {
+    font-weight: 600;
+  }
   label {
     color: rgb(10, 183, 176);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 15px;
   }
   .form-control:focus {
