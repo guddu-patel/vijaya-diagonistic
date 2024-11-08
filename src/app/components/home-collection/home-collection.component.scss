@@ -80,16 +80,8 @@
     height: 45px;
   }
 }
-.searchInp {
-  input {
-    border-right: none;
-    &:focus + .input-group-text {
-      border-color: $cgreen;
-    }
-  }
-  .input-group-text {
-    background: transparent;
-  }
+.homeCollection--heading {
+  font-weight: 600;
 }
 .patientDetail,
 .patientDetail2 {
@@ -105,7 +97,52 @@
     border-color: rgb(10, 183, 176);
     box-shadow: none;
   }
-  .form-control {
+  input.form-control {
+    height: 45px;
+  }
+  textarea.form-control {
+    min-height: 100px;
+  }
+  .form-check-input:checked {
+    background-color: rgb(10, 183, 176);
+    border-color: rgb(10, 183, 176);
+  }
+  .form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgb(10, 183, 176, 0.25);
+  }
+  .bookingDetails--addressLabel {
+    color: rgb(33, 37, 41);
+    position: relative;
+    top: -2px;
+  }
+  .patientDetail--patientInfo {
+    padding-right: 30px;
+    position: relative;
+  }
+  .patientDetail--patientInfo:after {
+    position: absolute;
+    right: -15px;
+    top: 30px;
+    height: calc(100% - 70px);
+    width: 2px;
+    border-radius: 10px;
+    background: rgb(10, 183, 176);
+    content: "";
+  }
+  .patientDetail--bookingDetails {
+    padding-left: 30px;
+  }
+  .card {
+    box-shadow: 0 0 0 0.25rem rgba(10, 183, 176, 0.25);
+  }
+  .card-text {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+}
+::ng-deep {
+  .patientDetail .ng-select.ng-select-single .ng-select-container {
     height: 45px;
   }
 }
@@ -116,5 +153,17 @@
   .spinner-border {
     width: 15px;
     height: 15px;
+  }
+}
+
+.searchInp {
+  input {
+    border-right: none;
+    &:focus + .input-group-text {
+      border-color: $cgreen;
+    }
+  }
+  .input-group-text {
+    background: transparent;
   }
 }
