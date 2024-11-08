@@ -239,7 +239,7 @@
   background-color: rgb(210 221 255 / 22%);
   justify-content: space-between;
   h3 {
-    font-family: Niramit;
+    font-family: Niramit-regular;
     font-size: 48px;
     font-weight: 600;
     line-height: 57.6px;
@@ -247,8 +247,8 @@
     color: #3f3f95;
     width: 614px;
   }
-  p{
-    font-family: Niramit;
+  p {
+    font-family: Niramit-regular;
     font-size: 15px;
     font-weight: 400;
     line-height: 28px;
@@ -257,9 +257,9 @@
     border-left-width: thick;
     border-style: solid;
     border-radius: 5px;
-    border-color: transparent transparent transparent #0AB7B0;
+    border-color: transparent transparent transparent #0ab7b0;
     padding-left: 16px;
-    color: #6F7F90;
+    color: #6f7f90;
   }
 }
 .google-rating {
@@ -269,7 +269,7 @@
   top: 316px;
 }
 .versatile-text {
-  font-family: Niramit;
+  font-family: Niramit-regular;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -294,7 +294,7 @@
       line-height: 24px;
       // font-family: "niramit-semi-bold";
       &.active {
-        background: #0AB7B0;
+        background: #0ab7b0;
         color: white;
       }
     }
@@ -321,4 +321,38 @@
       }
     }
   }
+}
+// @counter-style circle-checkbox {
+//   system: cyclic;
+//   symbols:
+//   suffix: " ";
+// }
+
+// .checkbox-list {
+//   ul {
+//     list-style: circle-checkbox;
+//   }
+// }
+.checkbox-list {
+  ul {
+    list-style-type: none;
+    margin-right: 51px;
+    margin-top: 10px;
+  }
+}
+
+.checkbox-list li {
+  position: relative;
+  padding-left: 30px;
+}
+
+.checkbox-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background-image: url("../../../../public/assets/img/Vector.png"); /* Path to the image */
+  background-size: cover;
 }
