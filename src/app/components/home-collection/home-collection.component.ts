@@ -476,7 +476,6 @@ export class HomeCollectionComponent implements AfterViewInit {
 
   onSubmit(): void {
     this.submitted = true;
-
     if (this.form.invalid) {
       return;
     }
@@ -659,6 +658,9 @@ export class HomeCollectionComponent implements AfterViewInit {
     }
   }
   changeFormMode() {
+    if (this.FormMode) {
+      this.onSubmit();
+    }
     this.FormMode = !this.FormMode;
   }
   toggleSpotBooking() {

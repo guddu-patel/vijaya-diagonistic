@@ -14,6 +14,10 @@ export class HomeCollectionSummaryComponent {
   patientDetail: any;
   testCalculationDetail: any;
   testsSelected: any;
+  selectedPaymentMode = 'paymentlink';
+  paymentDoneStatus = false;
+  paymentMSg: any = null;
+  testReqSent = false;
   constructor(private messageService: MessageService) {}
   ngOnInit() {
     console.log(this.data);
@@ -35,21 +39,36 @@ export class HomeCollectionSummaryComponent {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
-      detail: 'Submitting your request',
+      detail: 'Request has been sent successfully to Phlebo Admin',
     });
+    this.testReqSent = true;
+    this.paymentMSg = null;
+    // setTimeout(() => {
+    //   this.messageService.add({
+    //     severity: 'info',
+    //     summary: 'Info',
+    //     detail: 'Processing your payment',
+    //   });
+    // }, 3000);
+    // setTimeout(() => {
+    //   this.messageService.add({
+    //     severity: 'success',
+    //     summary: 'Success',
+    //     detail: 'Test request submitted ',
+    //   });
+    // }, 6000);
+  }
+  paymentLinkSend() {
+    this.paymentMSg = 'Sending payment link...';
     setTimeout(() => {
-      this.messageService.add({
-        severity: 'info',
-        summary: 'Info',
-        detail: 'Processing your payment',
-      });
-    }, 3000);
+      this.paymentMSg = 'Payment Link has been sent successfully';
+    }, 500);
     setTimeout(() => {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Test request submitted ',
-      });
-    }, 6000);
+      this.paymentMSg = 'Please wait while your payment has been processed';
+    }, 1000);
+    setTimeout(() => {
+      this.paymentMSg = 'Payment captured Successfully';
+      this.paymentDoneStatus = true;
+    }, 2000);
   }
 }

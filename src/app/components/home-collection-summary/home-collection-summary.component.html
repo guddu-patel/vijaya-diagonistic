@@ -1,67 +1,113 @@
 <div class="container py-3 mt-5">
-  <h4 class="text-cgreen">Test Summary</h4>
+  <h4 class="text-cgreen">
+    <i class="bi bi-arrow-left" role="button" (click)="openForm()"></i> Test
+    Summary
+  </h4>
   <hr />
   <div class="patientDetailContainer">
     <div class="row">
       <div class="col-sm">
-        <p class="colLabel">Patient Detail</p>
-        <p *ngIf="patientDetail">
-          <span class="text-capitalize">{{ patientDetail.title }} </span>
-          <span class="text-uppercase">
-            {{ patientDetail.firstName }} {{ patientDetail.lastName }}</span
-          >
-          ,
-          <span class="text-capitalize">{{ patientDetail.gender }}</span
-          >,
-          <span class="text-capitalize">{{ patientDetail.ageYear }}</span>
-          Years
-          <span class="text-capitalize">{{ patientDetail.ageMonth }}</span>
-          Months
-        </p>
+        <h4 class="colLabel">Patient Detail</h4>
+        <div class="card" style="width: 18rem" *ngIf="patientDetail">
+          <div class="card-body">
+            <p class="card-text">
+              <span class="text-capitalize">{{ patientDetail.fullName }} </span>
+            </p>
+            <p class="card-text">
+              <span class="text-capitalize">{{ patientDetail.gender }}</span
+              >,
+              <span class="text-capitalize">{{ patientDetail.ageYear }}</span>
+              Years
+              <span class="text-capitalize">{{ patientDetail.ageMonth }}</span>
+              Months
+            </p>
+            <p class="card-text">{{ patientDetail.email }}</p>
+            <p class="card-text">
+              {{ patientDetail.mobile.slice(0, 2) }}******{{
+                patientDetail.mobile.slice(-2)
+              }}
+            </p>
+          </div>
+        </div>
       </div>
       <div class="col-sm">
-        <p class="colLabel">Slot Date & Time</p>
-        <p *ngIf="homeCollectionData">
-          {{ homeCollectionData.selectedCollectionDate }}
-          {{ homeCollectionData.selectedSlot }}
-        </p>
+        <h4 class="colLabel">
+          Address Detail
+          <span class="small"
+            >({{ homeCollectionData.selectedDeliveryAddress.type }})</span
+          >
+        </h4>
+
+        <div class="card" style="width: 18rem">
+          <div class="card-body">
+            <!-- <p class="card-text">
+              ({{ homeCollectionData.selectedDeliveryAddress.type }})
+            </p> -->
+            <p class="card-text">
+              {{ homeCollectionData.selectedDeliveryAddress.address1 }}
+            </p>
+            <p class="card-text">
+              {{ homeCollectionData.selectedDeliveryAddress.address2 }}
+            </p>
+            <p class="card-text">
+              {{ homeCollectionData.selectedDeliveryAddress.citycode
+              }}{{ homeCollectionData.selectedDeliveryAddress.city }}
+            </p>
+            <p class="card-text">
+              {{ homeCollectionData.selectedDeliveryAddress.state }},{{
+                homeCollectionData.selectedDeliveryAddress.pin
+              }}
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="col-sm" *ngIf="homeCollectionData.selectedPostSlot">
+      <div class="col-sm">
+        <h4 class="colLabel">Slot Date & Time</h4>
+        <div class="card" style="width: 18rem" *ngIf="homeCollectionData">
+          <div class="card-body">
+            <p class="card-text">
+              {{ homeCollectionData.selectedCollectionDate }}
+            </p>
+            <p class="card-text">
+              {{ homeCollectionData.selectedSlot }}
+            </p>
+            <p class="card-text invisible">dummy</p>
+            <p class="card-text invisible">dummy</p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-sm" *ngIf="homeCollectionData.selectedPostSlot">
         <p class="colLabel">Second Slot Time</p>
         <p *ngIf="patientDetail">
           {{ homeCollectionData.selectedCollectionDate }}
           {{ homeCollectionData.selectedPostSlot }}
         </p>
-      </div>
+      </div> -->
       <div class="col-sm-12 border mt-5 p-0">
-        <table class="table table-striped table-hover mb-0">
+        <table class="table table-striped table-hover mb-0 testsTable">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Test Name</th>
-              <th scope="col">Original Price</th>
+              <th scope="col">Price</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let test of testsSelected; let i = index">
               <th scope="row">{{ i + 1 }}</th>
               <td>{{ test.testName }}</td>
-              <td>{{ test.price }}</td>
+              <td><i class="bi bi-currency-rupee"></i> {{ test.price }}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="mt-2">
-      <button
-        type="button"
-        class="btn btn-primary rounded-0 btn-sm"
-        (click)="openForm()"
-      >
+    <!-- <div class="mt-2">
+      <button type="button" class="btn btn-primary rounded-0 btn-sm" (click)="openForm()">
         BACK
       </button>
-    </div>
-    <div class="row">
+    </div> -->
+    <div class="row mt-3">
       <div class="col-sm-6"></div>
       <div class="col-sm-6">
         <div class="mb-3 row smallFont">
@@ -114,42 +160,54 @@
       <div class="col-sm-6"></div>
       <div class="col-sm-6">
         <div class="row py-2">
-          <div class="col-sm-6">Original Bill Amount</div>
-          <div class="col-sm-6">
+          <div class="col-sm-4 likeLabel">Original Bill Amount</div>
+          <div class="col-sm-8 likeLabelVal">
             <i class="bi bi-currency-rupee"></i>
             {{ testCalculationDetail.totalPrice }}
           </div>
         </div>
         <div class="row py-2">
-          <div class="col-sm-6">Amount After Discount</div>
-          <div class="col-sm-6">
+          <div class="col-sm-4 likeLabel">Amount After Discount</div>
+          <div class="col-sm-8 likeLabelVal">
             <i class="bi bi-currency-rupee"></i>
             {{ testCalculationDetail.totalPrice }}
           </div>
         </div>
         <div class="row py-2">
-          <div class="col-sm-6">Home Collection Charge</div>
-          <div class="col-sm-6"><i class="bi bi-currency-rupee"></i> 420</div>
+          <div class="col-sm-4 likeLabel">Home Collection Charge</div>
+          <div class="col-sm-8 likeLabelVal">
+            <i class="bi bi-currency-rupee"></i> 420
+          </div>
         </div>
-        <div class="row py-2 totalPayable">
-          <div class="col-sm-6">Total Amount Payable</div>
-          <div class="col-sm-6">
+        <div class="row py-2">
+          <div class="col-sm-4 likeLabel">Total Amount Payable</div>
+          <div class="col-sm-8 likeLabelVal">
             <i class="bi bi-currency-rupee"></i>
             {{ testCalculationDetail.totalPrice + 420 }}
           </div>
         </div>
         <div class="row py-2">
-          <div class="col-sm-6">Payment Mode</div>
-          <div class="col-sm-6">
+          <div class="col-sm-4 likeLabel">Payment Status</div>
+          <div
+            class="col-sm-8 likeLabelVal"
+            [ngClass]="paymentDoneStatus ? 'text-success' : 'text-danger'"
+          >
+            {{ paymentDoneStatus ? "Paid" : "Not Paid" }}
+          </div>
+        </div>
+        <div class="row py-2">
+          <div class="col-sm-4 likeLabel">Payment Mode</div>
+          <div class="col-sm-8">
             <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
                 type="radio"
                 name="inlineRadioOptions"
                 id="inlineRadio1"
-                value="cash"
+                value="upi"
+                [(ngModel)]="selectedPaymentMode"
               />
-              <label class="form-check-label" for="inlineRadio1">Cash</label>
+              <label class="form-check-label" for="inlineRadio1">UPI</label>
             </div>
             <div class="form-check form-check-inline">
               <input
@@ -157,12 +215,41 @@
                 type="radio"
                 name="inlineRadioOptions"
                 id="inlineRadio2"
-                value="mobile"
+                value="paymentlink"
+                [(ngModel)]="selectedPaymentMode"
               />
-              <label class="form-check-label" for="inlineRadio2">Mobile</label>
+              <label class="form-check-label" for="inlineRadio2"
+                >Payment Link</label
+              >
             </div>
             <br />
+            <ng-container *ngIf="!paymentDoneStatus">
+              <button
+                *ngIf="selectedPaymentMode === 'upi'"
+                type="button"
+                class="btn btn-danger btn-sm mt-3 w-100"
+              >
+                proceed
+              </button>
+              <button
+                *ngIf="selectedPaymentMode != 'upi'"
+                type="button"
+                class="btn btn-danger btn-sm mt-3 w-100"
+                (click)="paymentLinkSend()"
+              >
+                Send Payment Link
+              </button>
+            </ng-container>
+            <p *ngIf="paymentMSg" class="text-cgreen">{{ paymentMSg }}</p>
+          </div>
+        </div>
+        <div class="row py-2" *ngIf="paymentDoneStatus">
+          <div class="col-sm-12">
+            <p *ngIf="testReqSent" class="text-cblue">
+              This Test Has already send
+            </p>
             <button
+              *ngIf="!testReqSent"
               type="button"
               class="btn btn-danger btn-sm mt-3 w-100"
               (click)="submitTest()"

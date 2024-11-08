@@ -293,7 +293,10 @@
           </div>
           <div class="col-sm-6 d-flex">
             <button
-              [disabled]="testCalculationDetail.totalPrice <= 0"
+              [disabled]="
+                testCalculationDetail.totalPrice <= 0 ||
+                !homeCollectionData.selectedSlot
+              "
               type="button"
               class="btn btn-cgreen rounded-0 me-2 w-50"
               (click)="changeFormMode()"
