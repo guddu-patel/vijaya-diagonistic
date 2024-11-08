@@ -1,159 +1,173 @@
 <ng-container *ngIf="FormMode">
-  <div class="container py-3">
-    <h4 class="text-cgreen">Home Sample Collection Booking</h4>
+  <div class="container py-4">
+    <h4 class="text-cgreen homeCollection--heading">
+      Schedule Home Collection Appointment
+    </h4>
     <hr />
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="patientDetail">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="patientDetail--patientInfo">
+              <h4>Patient Details</h4>
+              <div class="mb-3">
+                <label for="patientDetailInput1" class="form-label"
+                  >Enter Patient's Mobile Number</label
+                >
+                <div class="input-group searchInp">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="patientDetailInput1"
+                    placeholder="Enter Mobile Number"
+                    (input)="checkPatient()"
+                    formControlName="mobile"
+                  />
+                  <span class="input-group-text"
+                    ><i class="bi bi-search"></i
+                  ></span>
+                </div>
+                <div class="custmSpin" *ngIf="showpatientList">
+                  Fetching User Data
+                  <div class="spinner-border text-cgreen" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="patientDetailInput1" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="patientDetailInput2"
+                  placeholder="Enter Name"
+                  formControlName="fullName"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="patientDetailInput3" class="form-label">DOB</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="patientDetailInput3"
+                  placeholder="Enter DOB"
+                  formControlName="dob"
+                  (change)="calculateAge()"
+                  max="{{ todayDate | date : 'yyyy-MM-dd' }}"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="patientDetailInput4" class="form-label">Age</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="patientDetailInput4"
+                  placeholder="Enter Age"
+                  formControlName="age"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="patientDetailInput5" class="form-label"
+                  >Address</label
+                >
+                <input
+                  type="textarea"
+                  class="form-control"
+                  id="patientDetailInput5"
+                  placeholder="Enter Address"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="patientDetailInpu6" class="form-label">Email</label>
+                <input
+                  type="textarea"
+                  class="form-control"
+                  id="patientDetailInput6"
+                  placeholder="Enter Email"
+                  formControlName="email"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="patientDetail--bookingDetails">
+              <h4>Booking Details</h4>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label">Prescribed By(Doctor)</label>
+                    <ng-select
+                      [items]="doctorList"
+                      bindLabel="name"
+                      placeholder="Select Doctor..."
+                      [(ngModel)]="homeCollectionData.selectedDoctor"
+                      [ngModelOptions]="{ standalone: true }"
+                      [addTag]="addCustomUser"
+                    >
+                    </ng-select>
+                  </div>
+                  <div>
+                    <div class="mb-3">
+                      <label for="bookignDetailsTextarea1" class="form-label"
+                        >Remarks</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="bookignDetailsTextarea1"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="mb-3">
+                      <label class="form-check-label form-label"
+                        >Home Collection Address</label
+                      >
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="defaultCheck1"
+                          checked="checked"
+                        />
+                        <label
+                          class="form-check-label bookingDetails--addressLabel"
+                          for="defaultCheck1"
+                        >
+                          Same as Permanent Address?
+                        </label>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="card" style="width: 18rem">
+                        <div class="card-body">
+                          <p class="card-text">244/52, Ashoka Enclave</p>
+                          <p class="card-text">Sector 121</p>
+                          <p class="card-text">Noida Greater Expressway</p>
+                          <p class="card-text">Noida, Uttar Pradesh, 201301</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" (click)="editAddress()">
+                      Add Address <i class="bi bi-pencil-square"></i>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8"></div>
+          </div>
+        </div>
+      </div>
+    </form>
     <div class="patientDetailContainer">
-      <div class="row">
-        <div class="col-sm">
-          <p class="colLabel">
-            Patient Details
-            <a data-bs-toggle="modal" href="#exampleModalToggle" role="button">
-              <i class="bi bi-plus-circle-fill text-cgreen"></i
-            ></a>
-          </p>
-          <p *ngIf="patientDetail">
-            <span class="text-capitalize">{{ patientDetail.title }} </span>
-            <span class="text-uppercase">
-              {{ patientDetail.firstName }} {{ patientDetail.lastName }}</span
-            >
-            ,
-            <span class="text-capitalize">{{ patientDetail.gender }}</span
-            >,
-            <span class="text-capitalize">{{ patientDetail.ageYear }}</span>
-            Years
-            <span class="text-capitalize">{{ patientDetail.ageMonth }}</span>
-            Months
-          </p>
-        </div>
-        <div class="col-sm">
-          <p class="colLabel">Doctor Name <br /></p>
-          <ng-select
-            [items]="doctorList"
-            bindLabel="name"
-            placeholder="Select Doctor..."
-            [(ngModel)]="homeCollectionData.selectedDoctor"
-            [addTag]="addCustomUser"
-          >
-          </ng-select>
-        </div>
-        <div class="col col-sm">
-          <p class="colLabel">Lead Source <br /></p>
-          <ng-select
-            [items]="leadSourceList"
-            bindLabel="name"
-            placeholder="Select Lead Source..."
-            [(ngModel)]="homeCollectionData.selectedLead"
-          >
-          </ng-select>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-sm-4 mb-3">
-          <p class="colLabel fw-bold">Is B2B User: <br /></p>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio1"
-              value="true"
-              [(ngModel)]="homeCollectionData.isb2buser"
-            />
-            <label class="form-check-label" for="inlineRadio1">True</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio2"
-              value="false"
-              [(ngModel)]="homeCollectionData.isb2buser"
-            />
-            <label class="form-check-label" for="inlineRadio2">False</label>
-          </div>
-        </div>
-        <div class="col-sm-4" *ngIf="homeCollectionData.isb2buser === 'true'">
-          <p class="colLabel fw-bold">Client: <br /></p>
-          <ng-select
-            [items]="clientList"
-            bindLabel="name"
-            placeholder="Select client..."
-            [(ngModel)]="homeCollectionData.selectedClient"
-            [addTag]="addCustomUser"
-          >
-          </ng-select>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-sm-4">
-          <p class="colLabel fw-bold">Select Delivery Address <br /></p>
-          <ng-select
-            [items]="deliveryAddressList"
-            bindLabel="shortName"
-            placeholder="Select Delivery Address..."
-            [(ngModel)]="homeCollectionData.selectedDeliveryAddress"
-            [addTag]="addCustomUser"
-            (change)="addnewAddress()"
-          >
-          </ng-select>
-        </div>
-        <div
-          class="col-sm-4"
-          *ngIf="homeCollectionData.selectedDeliveryAddress"
-        >
-          <p class="colLabel fw-bold">Select Diagonistic Center <br /></p>
-          <ng-select
-            [items]="diagonasticCenterList"
-            bindLabel="name"
-            placeholder="Select Center..."
-            [(ngModel)]="homeCollectionData.selectedDiagonasticCenter"
-            [addTag]="addCustomUser"
-          >
-          </ng-select>
-        </div>
-      </div>
-      <div
-        class="row"
-        *ngIf="
-          homeCollectionData.selectedDeliveryAddress &&
-          homeCollectionData.selectedDeliveryAddress.shortName != 'Add New'
-        "
-      >
-        <div class="col-sm-4">
-          <div class="addressSelected mt-3">
-            <p class="text-end mb-1" (click)="editAddress()">
-              <i class="bi bi-pencil-square"></i>
-            </p>
-            <p>
-              {{ homeCollectionData.selectedDeliveryAddress.shortName }}({{
-                homeCollectionData.selectedDeliveryAddress.type
-              }})
-            </p>
-            <p>
-              {{ homeCollectionData.selectedDeliveryAddress.landmark }},{{
-                homeCollectionData.selectedDeliveryAddress.address1
-              }}
-            </p>
-            <p>{{ homeCollectionData.selectedDeliveryAddress.address2 }}</p>
-            <p class="mb-0">
-              {{ homeCollectionData.selectedDeliveryAddress.city }},
-              {{ homeCollectionData.selectedDeliveryAddress.state }}-{{
-                homeCollectionData.selectedDeliveryAddress.pin
-              }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-8 mt-3">
-          <textarea
-            class="form-control"
-            placeholder="Please add remarks/route if any..."
-            [(ngModel)]="homeCollectionData.remarkRoute"
-          ></textarea>
-        </div>
-      </div>
+      <hr />
+
       <div class="row border pt-1 mt-3 mx-0">
         <div class="col-4 my-auto">Add Diagonistic Test</div>
         <div class="col-4"></div>
@@ -165,12 +179,13 @@
           aria-label=".form-control-sm example"
         /> -->
           <ng-select
-            [disabled]="!homeCollectionData.selectedDiagonasticCenter"
             [items]="availableTests"
             bindLabel="testName"
             placeholder="Select Test..."
             [(ngModel)]="homeCollectionData.selectedTest"
+            [ngModelOptions]="{ standalone: true }"
             (change)="selectTest($event)"
+            class="form-control"
           >
           </ng-select>
         </div>
@@ -219,6 +234,7 @@
               <input
                 type="date"
                 [(ngModel)]="homeCollectionData.selectedCollectionDate"
+                [ngModelOptions]="{ standalone: true }"
                 class="form-control form-control-sm slotDate"
               />
             </div>
@@ -226,6 +242,7 @@
               class="form-select form-control form-control-sm w-50 slotTime"
               aria-label="Default select example"
               [(ngModel)]="homeCollectionData.selectedSlot"
+              [ngModelOptions]="{ standalone: true }"
               [ariaPlaceholder]="'Select Slot'"
             >
               <option *ngIf="!spotBookingenabled" value="" selected disabled>
@@ -283,6 +300,7 @@
               class="form-select form-control form-control-sm w-50 slotTime"
               aria-label="Default select example"
               [(ngModel)]="homeCollectionData.selectedPostSlot"
+              [ngModelOptions]="{ standalone: true }"
               (change)="checkSlotError()"
             >
               <option *ngIf="!spotBookingenabled" value="" selected disabled>
@@ -334,19 +352,10 @@
         </div>
         <div class="modal-body">
           <div class="register-form">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form1" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <label>Mobile number*</label>
 
-                <!-- <ng-select
-                [items]="patientSourceList"
-                bindLabel="name"
-                placeholder="Enter Mobile Number..."
-                [(ngModel)]="selectedPatient"
-                formControlName="mobile"
-                [addTag]="addCustomUser"
-              >
-              </ng-select> -->
                 <input
                   type="number"
                   formControlName="mobile"
@@ -441,7 +450,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label>First Name*</label>
                 <input
                   type="text"
@@ -459,7 +468,7 @@
                     First Name is required
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="form-group">
                 <label>Last Name</label>
                 <input
@@ -635,9 +644,9 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="addNewAddressFormModalLabel">
+          <h4 class="modal-title" id="addNewAddressFormModalLabel">
             {{ editAddMode ? "Update" : "New" }} Address
-          </h5>
+          </h4>
           <button
             type="button"
             class="btn-close"
@@ -648,12 +657,12 @@
         <div class="modal-body">
           <div class="register-form">
             <form [formGroup]="addressForm" (ngSubmit)="onAddressSubmit()">
-              <div class="form-group">
-                <label>Address Type*</label>
+              <div class="form-group mx-3">
+                <label class="form-label">Address Type*</label>
                 <select
                   aria-label="Default select example"
                   formControlName="type"
-                  class="form-select form-control form-control-sm p-1"
+                  class="form-select form-control form-control-sm"
                   [ngClass]="{
                     'is-invalid': submittedAdd && addf['type'].errors
                   }"
@@ -671,8 +680,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label>Address short Name*</label>
+              <div class="form-group m-3">
+                <label class="form-label">Address short Name*</label>
                 <input
                   type="text"
                   formControlName="shortName"
@@ -690,8 +699,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label>Address Line 1*</label>
+              <div class="form-group m-3">
+                <label class="form-label">Address Line 1*</label>
                 <input
                   type="text"
                   formControlName="address1"
@@ -709,8 +718,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label>Address Line 2*</label>
+              <div class="form-group m-3">
+                <label class="form-label">Address Line 2*</label>
                 <input
                   type="text"
                   formControlName="address2"
@@ -728,8 +737,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label>Landmark*</label>
+              <div class="form-group m-3">
+                <label class="form-label">Landmark*</label>
                 <input
                   type="text"
                   formControlName="landmark"
@@ -747,8 +756,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label>Pin Code*</label>
+              <div class="form-group m-3">
+                <label class="form-label">Pin Code*</label>
                 <input
                   type="text"
                   formControlName="pin"
@@ -766,8 +775,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label>Area*</label>
+              <div class="form-group m-3">
+                <label class="form-label">Area*</label>
                 <input
                   type="text"
                   formControlName="area"
@@ -785,8 +794,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label>City*</label>
+              <div class="form-group m-3">
+                <label class="form-label">City*</label>
                 <input
                   type="text"
                   formControlName="city"
@@ -804,8 +813,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label>State*</label>
+              <div class="form-group m-3">
+                <label class="form-label">State*</label>
                 <input
                   type="text"
                   formControlName="state"

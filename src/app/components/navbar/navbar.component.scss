@@ -74,3 +74,29 @@
     background-color: $cblue;
   }
 }
+.profile-card {
+  display: flex;
+  justify-items: center;
+
+  padding-top: 13px;
+  .profile-details {
+    position: relative;
+    top: -2px;
+  }
+  img {
+    height: 38px;
+    margin-right: 5px;
+  }
+  .profile-details {
+    strong {
+      font-size: 17px;
+      font-weight: 600;
+      display: block;
+    }
+    span {
+      font-size: 14px;
+      position: relative;
+      top: -10px;
+    }
+  }
+}
