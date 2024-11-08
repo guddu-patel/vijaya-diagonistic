@@ -77,8 +77,12 @@
 .profile-card {
   display: flex;
   justify-items: center;
-  vertical-align: middle;
+
   padding-top: 13px;
+  .profile-details {
+    position: relative;
+    top: -2px;
+  }
   img {
     height: 38px;
     margin-right: 5px;

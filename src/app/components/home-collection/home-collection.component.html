@@ -1,69 +1,140 @@
 <ng-container *ngIf="FormMode">
   <div class="container py-3">
-    <h4 class="text-cgreen">Schedule Home Collection Appointment</h4>
+    <h4 class="text-cgreen homeCollection--heading">
+      Schedule Home Collection Appointment
+    </h4>
     <hr />
     <div class="patientDetail">
       <div class="row">
         <div class="col-sm-4">
-          <h4>Patient Details</h4>
-          <div class="mb-3">
-            <label for="patientDetailInput1" class="form-label"
-              >Enter Patient's Mobile Number</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="patientDetailInput1"
-              placeholder="Enter Mobile Number"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="patientDetailInput1" class="form-label">Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="patientDetailInput2"
-              placeholder="Enter Name"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="patientDetailInput3" class="form-label">DOB</label>
-            <input
-              type="text"
-              class="form-control"
-              id="patientDetailInput3"
-              placeholder="Enter DOB"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="patientDetailInput4" class="form-label">Age</label>
-            <input
-              type="text"
-              class="form-control"
-              id="patientDetailInput4"
-              placeholder="Enter Age"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="patientDetailInput5" class="form-label">Address</label>
-            <input
-              type="textarea"
-              class="form-control"
-              id="patientDetailInput5"
-              placeholder="Enter Address"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="patientDetailInpu6" class="form-label">Email</label>
-            <input
-              type="textarea"
-              class="form-control"
-              id="patientDetailInput6"
-              placeholder="Enter Email"
-            />
+          <div class="patientDetail--patientInfo">
+            <h4>Patient Details</h4>
+            <div class="mb-3">
+              <label for="patientDetailInput1" class="form-label"
+                >Enter Patient's Mobile Number</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="patientDetailInput1"
+                placeholder="Enter Mobile Number"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientDetailInput1" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="patientDetailInput2"
+                placeholder="Enter Name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientDetailInput3" class="form-label">DOB</label>
+              <input
+                type="text"
+                class="form-control"
+                id="patientDetailInput3"
+                placeholder="Enter DOB"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientDetailInput4" class="form-label">Age</label>
+              <input
+                type="text"
+                class="form-control"
+                id="patientDetailInput4"
+                placeholder="Enter Age"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientDetailInput5" class="form-label"
+                >Address</label
+              >
+              <input
+                type="textarea"
+                class="form-control"
+                id="patientDetailInput5"
+                placeholder="Enter Address"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="patientDetailInpu6" class="form-label">Email</label>
+              <input
+                type="textarea"
+                class="form-control"
+                id="patientDetailInput6"
+                placeholder="Enter Email"
+              />
+            </div>
           </div>
         </div>
-        <div class="col-sm-8"></div>
+        <div class="col-sm-8">
+          <div class="patientDetail--bookingDetails">
+            <h4>Booking Details</h4>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="mb-3">
+                  <label class="form-label">Prescribed By(Doctor)</label>
+                  <ng-select
+                    [items]="doctorList"
+                    bindLabel="name"
+                    placeholder="Select Doctor..."
+                    [(ngModel)]="homeCollectionData.selectedDoctor"
+                    [addTag]="addCustomUser"
+                  >
+                  </ng-select>
+                </div>
+                <div>
+                  <div class="mb-3">
+                    <label for="bookignDetailsTextarea1" class="form-label"
+                      >Remarks</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="bookignDetailsTextarea1"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="mb-3">
+                    <label class="form-check-label form-label"
+                      >Home Collection Address</label
+                    >
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="defaultCheck1"
+                        checked="checked"
+                      />
+                      <label
+                        class="form-check-label bookingDetails--addressLabel"
+                        for="defaultCheck1"
+                      >
+                        Same as Permanent Address?
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="card" style="width: 18rem">
+                      <div class="card-body">
+                        <p class="card-text">244/52, Ashoka Enclave</p>
+                        <p class="card-text">Sector 121</p>
+                        <p class="card-text">Noida Greater Expressway</p>
+                        <p class="card-text">Noida, Uttar Pradesh, 201301</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="patientDetailContainer">
