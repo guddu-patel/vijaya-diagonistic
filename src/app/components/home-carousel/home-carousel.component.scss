@@ -38,7 +38,8 @@
   -webkit-animation: thing 30s;
   -o-animation: thing 30s;
   animation: thing 30s;
-  // height: 680px;
+  height: 680px;
+  object-fit: cover;
 }
 
 .carousel-indicators [data-bs-target] {

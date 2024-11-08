@@ -66,3 +66,35 @@
     margin-left: 20px;
   }
 }
+.patientDetails1 {
+  .form-control:focus {
+    border-color: rgb(10, 183, 176);
+    box-shadow: none;
+  }
+
+  .form-floating > .form-control:focus ~ label,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: rgb(10, 183, 176);
+  }
+  .form-control {
+    height: 45px;
+  }
+}
+.patientDetail,
+.patientDetail2 {
+  h4 {
+    font-weight: 600;
+  }
+  label {
+    color: rgb(10, 183, 176);
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .form-control:focus {
+    border-color: rgb(10, 183, 176);
+    box-shadow: none;
+  }
+  .form-control {
+    height: 45px;
+  }
+}
