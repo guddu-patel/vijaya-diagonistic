@@ -80,6 +80,17 @@
     height: 45px;
   }
 }
+.searchInp {
+  input {
+    border-right: none;
+    &:focus + .input-group-text {
+      border-color: $cgreen;
+    }
+  }
+  .input-group-text {
+    background: transparent;
+  }
+}
 .patientDetail,
 .patientDetail2 {
   h4 {
@@ -96,5 +107,14 @@
   }
   .form-control {
     height: 45px;
+  }
+}
+.custmSpin {
+  font-size: small;
+  color: $cgrey;
+  padding-top: 2px;
+  .spinner-border {
+    width: 15px;
+    height: 15px;
   }
 }
