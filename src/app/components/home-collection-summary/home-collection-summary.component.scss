@@ -1,15 +1,183 @@
 @import "../../../custom-variable";
 
-.patientDetailContainer {
-  .colLabel {
-    margin-bottom: 5px;
-    font-size: 14px;
-  }
-}
 .smallFont {
   font-size: 14px;
   .totalPayable {
     font-size: 16px;
+  }
+}
+
+.patientDetailContainer {
+  .colLabel {
+    // color: rgb(10, 183, 176);
+    font-weight: 600;
+    // font-size: 15px;
+  }
+  .card {
+    box-shadow: 0 0 0 0.25rem rgba(10, 183, 176, 0.25);
+  }
+  .card-text {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+}
+.register-form {
+  .form-group {
+    margin-bottom: 5px;
+  }
+}
+.existingPatientList {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   .singlePatient {
+  //     margin: 2px;
+  label.radio {
+    cursor: pointer;
+    padding: 5px;
+    position: relative;
+  }
+  label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  label.radio span {
+    padding: 7px 14px;
+    border: 2px solid #eee;
+    display: inline-block;
+    color: $cgreen;
+    border-radius: 3px;
+    width: 100%;
+  }
+  label.radio input:checked + span {
+    border-color: $cgreen;
+  }
+  .patientCheckIcon {
+    position: absolute;
+    right: 11px;
+    top: 27%;
+  }
+  //   }
+}
+.addressSelected {
+  box-shadow: 0px 9px 17px 5px lightgrey;
+  padding: 15px;
+  font-size: 12px;
+}
+.slotContainer {
+  .slotInfo {
+    font-size: 10px;
+  }
+  .slotDate {
+    height: 100%;
+    text-align: center;
+    margin-right: 20px;
+  }
+  .slotTime {
+    margin-left: 20px;
+  }
+}
+.homeCollection--heading {
+  font-weight: 600;
+}
+h4 {
+  font-weight: 600;
+}
+label,
+.likeLabel {
+  color: rgb(10, 183, 176);
+  font-weight: 600;
+  font-size: 15px;
+}
+.form-control:focus {
+  border-color: rgb(10, 183, 176);
+  box-shadow: none;
+}
+input.form-control,
+select.form-control {
+  height: 45px;
+}
+textarea.form-control {
+  min-height: 100px;
+}
+.form-check-input:checked {
+  background-color: rgb(10, 183, 176);
+  border-color: rgb(10, 183, 176);
+}
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgb(10, 183, 176, 0.25);
+}
+.patientDetail {
+  .bookingDetails--addressLabel {
+    color: rgb(33, 37, 41);
+    position: relative;
+    top: -2px;
+  }
+  .patientDetail--patientInfo {
+    padding-right: 30px;
+    position: relative;
+  }
+  .patientDetail--patientInfo:after {
+    position: absolute;
+    right: -15px;
+    top: 30px;
+    height: calc(100% - 70px);
+    width: 2px;
+    border-radius: 10px;
+    background: rgb(10, 183, 176);
+    content: "";
+  }
+  .patientDetail--bookingDetails {
+    padding-left: 30px;
+  }
+}
+::ng-deep {
+  .ng-select.ng-select-single .ng-select-container {
+    height: 45px;
+  }
+}
+.custmSpin {
+  font-size: small;
+  color: $cgrey;
+  padding-top: 2px;
+  .spinner-border {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.searchInp {
+  input {
+    border-right: none;
+    &:focus + .input-group-text {
+      border-color: $cgreen;
+    }
+  }
+  .input-group-text {
+    background: transparent;
+  }
+}
+#addNewAddressFormModal {
+  .modal-header {
+    border-color: rgb(10, 183, 176);
+    padding: 16px 30px;
+  }
+}
+
+.testsTable {
+  thead tr th {
+    color: $cgreen;
+  }
+  &.table-striped > tbody > tr:nth-child(odd) > td,
+  &.table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: $clightgreen; // Choose your own color here
+  }
+  tbody tr:hover td,
+  tbody tr:hover th {
+    background-color: $clightgreen;
   }
 }
 .profile-card {

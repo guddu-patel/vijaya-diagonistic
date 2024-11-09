@@ -156,3 +156,17 @@ textarea.form-control {
     padding: 16px 30px;
   }
 }
+
+.testsTable {
+  thead tr th {
+    color: $cgreen;
+  }
+  &.table-striped > tbody > tr:nth-child(odd) > td,
+  &.table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: $clightgreen; // Choose your own color here
+  }
+  tbody tr:hover td,
+  tbody tr:hover th {
+    background-color: $clightgreen;
+  }
+}
