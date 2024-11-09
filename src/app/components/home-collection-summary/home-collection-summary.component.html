@@ -1,10 +1,37 @@
 <div class="container py-3 mt-5">
-  <h4 class="text-cgreen">Test Summary</h4>
-  <hr />
-  <div class="patientDetailContainer">
+  <h4 class="text-cgreen" style="font-weight: 600">Test Summary</h4>
+  <!-- <hr /> -->
+  <div class="patientDetailContainer mt-5">
     <div class="row">
       <div class="col-sm">
-        <p class="colLabel">Patient Detail</p>
+        <div class="profile-card" style="width: 30rem">
+          <div class="d-flex" style="margin-top: 23px; margin-left: 34px">
+            <img
+              src="assets/img/icon-profile.png"
+              class="card-img-top"
+              alt="..."
+            />
+            <span class="user-name">Mr. Himanshu</span>
+          </div>
+          <div class="mt-4">
+            <h5>Contact Details :</h5>
+          </div>
+          <ul class="mt-3">
+            <li class="d-flex">
+              <div class="iconBack">
+                <img class="iconCall" src="assets/icons/call.png" alt="" />
+              </div>
+              <span style="color: grey">11111</span>
+            </li>
+            <li class="d-flex mt-2">
+              <div class="iconBack">
+                <img class="iconMail" src="assets/icons/mail.png" alt="" />
+              </div>
+              <span style="color: grey">{{ homeCollectionData.email }}</span>
+            </li>
+          </ul>
+        </div>
+        <!-- <p class="colLabel">Patient Detail</p>
         <p *ngIf="patientDetail">
           <span class="text-capitalize">{{ patientDetail.title }} </span>
           <span class="text-uppercase">
@@ -17,14 +44,28 @@
           Years
           <span class="text-capitalize">{{ patientDetail.ageMonth }}</span>
           Months
-        </p>
+        </p> -->
       </div>
       <div class="col-sm">
-        <p class="colLabel">Slot Date & Time</p>
-        <p *ngIf="homeCollectionData">
-          {{ homeCollectionData.selectedCollectionDate }}
-          {{ homeCollectionData.selectedSlot }}
-        </p>
+        <div class="profile-card" style="width: 33rem">
+          <div style="margin-top: 11px">
+            <h5>Overview :</h5>
+          </div>
+          <div class="overview">
+            <div class="overview-data">
+              <div class="sub-div">Gender :</div>
+              <div class="sub-detail">Male</div>
+            </div>
+            <div>
+              <div class="sub-div">Date of Birth :</div>
+              <div class="sub-detail">5/11/2022</div>
+            </div>
+            <div>
+              <div class="sub-div">first Slot Time :</div>
+              <div class="sub-detail">10 jan</div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-sm" *ngIf="homeCollectionData.selectedPostSlot">
         <p class="colLabel">Second Slot Time</p>

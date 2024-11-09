@@ -23,7 +23,7 @@ import {
 export class HomeCollectionComponent implements AfterViewInit {
   @ViewChild('addressModalBtnOpen', { static: false })
   openAddModal!: ElementRef;
-  FormMode = true;
+  FormMode = false;
   todayDate = new Date();
 
   doctorList = [

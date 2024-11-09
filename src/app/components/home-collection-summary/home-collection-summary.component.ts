@@ -23,6 +23,7 @@ export class HomeCollectionSummaryComponent {
       testCalculationDetail,
       testsSelected,
     } = this.data;
+    homeCollectionData.email = 'rhimanshu021@gmail.com';
     this.homeCollectionData = homeCollectionData;
     this.patientDetail = patientDetail;
     this.testCalculationDetail = testCalculationDetail;
