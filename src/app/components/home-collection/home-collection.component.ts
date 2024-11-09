@@ -158,7 +158,7 @@ export class HomeCollectionComponent implements AfterViewInit {
       dob: '2002-06-06',
       address: {
         address1: '379/A, Krishna Nagar Colony',
-        address2: 'Bholakpur, Sicundrabad,',
+        address2: 'Bholakpur, Secunderabad,',
         citycode: 'HYD ',
         city: 'Hyderabad',
         state: 'Telangana',
@@ -168,7 +168,7 @@ export class HomeCollectionComponent implements AfterViewInit {
         area: '',
       },
       fullAddress:
-        '379/A, Krishna Nagar Colony, Bholakpur, Sicundrabad, HYD Telangana, Hyderabad 500020',
+        '379/A, Krishna Nagar Colony, Bholakpur, Secunderabad, HYD Telangana, Hyderabad 500020',
     },
     {
       id: 2,
@@ -347,14 +347,14 @@ export class HomeCollectionComponent implements AfterViewInit {
       group: 'sugar',
     },
     {
-      testName: 'Diebetes Screening (HbA1C & Fasting Sugar)',
+      testName: 'Diabetes Screening (HbA1C & Fasting Sugar)',
       price: 1850,
       precausion: 'Over night fasting',
       type: 'Normal',
       group: 'sugar',
     },
     {
-      testName: 'COVID- RT PCR',
+      testName: 'COVID-RT PCR',
       price: 1350,
       precausion: 'Over night fasting',
       type: 'Normal',
