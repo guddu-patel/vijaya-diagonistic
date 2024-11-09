@@ -296,6 +296,7 @@
                 [(ngModel)]="homeCollectionData.selectedCollectionDate"
                 [ngModelOptions]="{ standalone: true }"
                 class="form-control form-control-sm slotDate"
+                max="{{ maxSlotDate | date : 'yyyy-MM-dd' }}"
               />
             </div>
             <select

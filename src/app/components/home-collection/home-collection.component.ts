@@ -23,9 +23,9 @@ import {
 export class HomeCollectionComponent implements AfterViewInit {
   @ViewChild('addressModalBtnOpen', { static: false })
   openAddModal!: ElementRef;
-  FormMode = false;
+  FormMode = true;
   todayDate = new Date();
-
+  maxSlotDate = this.todayDate.setMonth(this.todayDate.getMonth() + 1);
   doctorList = [
     { id: 1, name: 'Dr. SK patel' },
     { id: 2, name: 'Dr. Anjit misra' },
