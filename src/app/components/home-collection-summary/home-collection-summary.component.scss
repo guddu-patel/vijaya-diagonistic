@@ -12,6 +12,8 @@
     // color: rgb(10, 183, 176);
     font-weight: 600;
     // font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 14px;
   }
   .card {
     box-shadow: 0 0 0 0.25rem rgba(10, 183, 176, 0.25);
@@ -197,4 +199,7 @@ textarea.form-control {
 
 .likeLabelVal {
   font-weight: 900;
+}
+.tableView {
+  margin-top: -3px;
 }
