@@ -199,3 +199,15 @@ textarea.form-control {
 .tableView {
   margin-top: -3px;
 }
+.spinnerContainer {
+  .spinner-border {
+    color: #3f3f95 !important;
+    width: 20px;
+    height: 20px;
+  }
+  .spinnerText {
+    color: #0ab7b0;
+    font-size: 20px;
+    margin-left: 14px;
+  }
+}

@@ -203,6 +203,8 @@
                     id="inlineRadio2"
                     value="paymentlink"
                     [(ngModel)]="selectedPaymentMode"
+                    (change)="paymentModeChange()"
+                    [disabled]="paymentDoneStatus"
                   />
                   <label class="form-check-label" for="inlineRadio2"
                     >Payment Link</label
@@ -216,11 +218,13 @@
                     id="inlineRadio1"
                     value="upi"
                     [(ngModel)]="selectedPaymentMode"
+                    (change)="paymentModeChange()"
+                    [disabled]="paymentDoneStatus"
                   />
                   <label class="form-check-label" for="inlineRadio1">UPI</label>
                 </div>
 
-                <br />
+                <!-- <br />
                 <ng-container *ngIf="!paymentDoneStatus">
                   <button
                     *ngIf="selectedPaymentMode === 'upi'"
@@ -240,12 +244,12 @@
                 </ng-container>
                 <p *ngIf="paymentMSg" class="text-cgreen pt-1 m-0">
                   {{ paymentMSg }}
-                </p>
+                </p> -->
               </div>
             </div>
             <div class="row py-2" *ngIf="paymentDoneStatus">
               <div class="col-sm-12">
-                <p *ngIf="testReqSent" class="text-cblue">
+                <p *ngIf="testReqSent" class="text-cblue fw-bold">
                   Your booking has been confirmed and send to phlebologist.
                 </p>
                 <button
@@ -270,3 +274,65 @@
   </div>
 </div>
 <p-toast></p-toast>
+<button
+  hidden
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+  #openModal
+>
+  Show Modal</button
+><button
+  hidden
+  type="button"
+  class="btn btn-secondary"
+  data-bs-dismiss="modal"
+  data-bs-target="#exampleModal"
+  #closeModal
+>
+  Close
+</button>
+<div
+  class="modal fade"
+  id="exampleModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="min-width: 600px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Processing Payment</h5>
+      </div>
+      <div class="modal-body">
+        <p class="text-danger text-center mb-2">
+          Please don't refresh this page.
+        </p>
+        <div
+          class="paymentRunningStatus mb-3"
+          *ngIf="allPaymentMessage.length > 0"
+        >
+          <ol class="list-group m-auto w-75">
+            <li class="list-group-item" *ngFor="let item of allPaymentMessage">
+              {{ item }}
+              <i class="bi bi-check-circle ms-auto text-cgreen float-end"></i>
+            </li>
+          </ol>
+        </div>
+        <div
+          class="text-center spinnerContainer mb-5"
+          *ngIf="!paymentDoneStatus"
+        >
+          <span
+            class="spinner-border spinner-border-sm text-cgreen"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          <span class="spinnerText">{{ paymentMSg }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
