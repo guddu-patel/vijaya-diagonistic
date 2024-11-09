@@ -1,5 +1,5 @@
 <div class="container py-3 mt-2">
-  <h4 class="text-cgreen">
+  <h4 class="text-cgreen fw-bold">
     <i class="bi bi-arrow-left" role="button" (click)="openForm()"></i> Test
     Summary
   </h4>
@@ -7,97 +7,103 @@
   <div class="patientDetailContainer">
     <div class="row">
       <div class="col-sm-4">
-        <div class="">
-          <h4 class="colLabel">Patient Detail</h4>
-          <div class="card" style="width: 18rem" *ngIf="patientDetail">
-            <div class="card-body">
-              <p class="card-text">
-                <span class="text-capitalize"
-                  >{{ patientDetail.fullName }}
-                </span>
-              </p>
-              <p class="card-text">
-                <span class="text-capitalize">{{ patientDetail.gender }}</span
-                >,
-                <span class="text-capitalize">{{ patientDetail.ageYear }}</span>
-                Years
-                <span class="text-capitalize">{{
-                  patientDetail.ageMonth
-                }}</span>
-                Months
-              </p>
-              <p class="card-text">{{ patientDetail.email }}</p>
-              <p class="card-text">
-                {{ patientDetail.mobile.slice(0, 2) }}******{{
-                  patientDetail.mobile.slice(-2)
-                }}
-              </p>
+        <div class="patientDetail--patientInfo">
+          <div class="">
+            <h4 class="colLabel">Patient Detail</h4>
+            <div class="" style="width: 18rem" *ngIf="patientDetail">
+              <div class="card-body">
+                <p class="card-text">
+                  <span class="text-capitalize"
+                    >{{ patientDetail.fullName }}
+                  </span>
+                </p>
+                <p class="card-text">
+                  <span class="text-capitalize">{{ patientDetail.gender }}</span
+                  >,
+                  <span class="text-capitalize">{{
+                    patientDetail.ageYear
+                  }}</span>
+                  Years
+                  <span class="text-capitalize">{{
+                    patientDetail.ageMonth
+                  }}</span>
+                  Months
+                </p>
+                <p class="card-text">{{ patientDetail.email }}</p>
+                <p class="card-text">
+                  {{ patientDetail.mobile.slice(0, 3) }}*****{{
+                    patientDetail.mobile.slice(-2)
+                  }}
+                </p>
+              </div>
             </div>
+            <hr class="w-75" />
           </div>
-        </div>
-        <div class="" *ngIf="homeCollectionData">
-          <h4 class="colLabel">
-            Address Detail
-            <span
-              class="small"
-              *ngIf="homeCollectionData.selectedDeliveryAddress"
-              >({{ homeCollectionData.selectedDeliveryAddress.type }})</span
-            >
-          </h4>
+          <div class="" *ngIf="homeCollectionData">
+            <h4 class="colLabel">
+              Address Detail
+              <span
+                class="small"
+                *ngIf="homeCollectionData.selectedDeliveryAddress"
+                >({{ homeCollectionData.selectedDeliveryAddress.type }})</span
+              >
+            </h4>
 
-          <div
-            class="card"
-            style="width: 18rem"
-            *ngIf="homeCollectionData.selectedDeliveryAddress"
-          >
-            <div class="card-body">
-              <p class="card-text">
-                {{ homeCollectionData.selectedDeliveryAddress.address1 }}
-              </p>
-              <p class="card-text">
-                {{ homeCollectionData.selectedDeliveryAddress.address2 }}
-              </p>
-              <p class="card-text">
-                {{ homeCollectionData.selectedDeliveryAddress.citycode
-                }}{{ homeCollectionData.selectedDeliveryAddress.city }}
-              </p>
-              <p class="card-text">
-                {{ homeCollectionData.selectedDeliveryAddress.state }},{{
-                  homeCollectionData.selectedDeliveryAddress.pin
-                }}
-              </p>
+            <div
+              class=""
+              style="width: 18rem"
+              *ngIf="homeCollectionData.selectedDeliveryAddress"
+            >
+              <div class="card-body">
+                <p class="card-text">
+                  {{ homeCollectionData.selectedDeliveryAddress.address1 }}
+                </p>
+                <p class="card-text">
+                  {{ homeCollectionData.selectedDeliveryAddress.address2 }}
+                </p>
+                <p class="card-text">
+                  {{ homeCollectionData.selectedDeliveryAddress.citycode
+                  }}{{ homeCollectionData.selectedDeliveryAddress.city }}
+                </p>
+                <p class="card-text">
+                  {{ homeCollectionData.selectedDeliveryAddress.state }},{{
+                    homeCollectionData.selectedDeliveryAddress.pin
+                  }}
+                </p>
+              </div>
+            </div>
+            <hr class="w-75" />
+          </div>
+          <div class="">
+            <h4 class="colLabel">Slot Date & Time</h4>
+            <div
+              class=""
+              style="width: 18rem"
+              *ngIf="homeCollectionData.selectedSlot"
+            >
+              <div class="card-body">
+                <p class="card-text">
+                  Date: {{ homeCollectionData.selectedCollectionDate }}
+                </p>
+                <p class="card-text">
+                  Time: {{ homeCollectionData.selectedSlot }}
+                </p>
+                <p class="card-text invisible">dummy</p>
+                <p class="card-text invisible">dummy</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="">
-          <h4 class="colLabel">Slot Date & Time</h4>
-          <div
-            class="card"
-            style="width: 18rem"
-            *ngIf="homeCollectionData.selectedSlot"
-          >
-            <div class="card-body">
-              <p class="card-text">
-                {{ homeCollectionData.selectedCollectionDate }}
-              </p>
-              <p class="card-text">
-                {{ homeCollectionData.selectedSlot }}
-              </p>
-              <p class="card-text invisible">dummy</p>
-              <p class="card-text invisible">dummy</p>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="col-sm" *ngIf="homeCollectionData.selectedPostSlot">
+          <!-- <div class="col-sm" *ngIf="homeCollectionData.selectedPostSlot">
         <p class="colLabel">Second Slot Time</p>
         <p *ngIf="patientDetail">
           {{ homeCollectionData.selectedCollectionDate }}
           {{ homeCollectionData.selectedPostSlot }}
         </p>
       </div> -->
+        </div>
       </div>
-      <div class="col-sm-8">
-        <h4 class="colLabel">Seleted Tests</h4>
+      <div class="col-sm-8 ps-5">
+        <h4 class="colLabel">Selected Tests</h4>
         <div class="border tableView p-0">
           <table class="table table-striped table-hover mb-0 testsTable">
             <thead>
@@ -109,7 +115,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let test of testsSelected; let i = index">
-                <th scope="row">{{ i + 1 }}</th>
+                <td scope="row">{{ i + 1 }}</td>
                 <td>{{ test.testName }}</td>
                 <td><i class="bi bi-currency-rupee"></i> {{ test.price }}</td>
               </tr>
@@ -120,21 +126,6 @@
           <div class="col-sm">
             <div class="mb-3 row smallFont">
               <label for="staticEmail" class="col-sm-4 col-form-label"
-                >Client</label
-              >
-              <div class="col-sm-8">
-                <select
-                  class="form-select form-control form-control-lg"
-                  aria-label="Default select example"
-                >
-                  <option value="general" selected>General</option>
-                  <option value="special">special</option>
-                </select>
-              </div>
-              <p class="col-sm-12 my-2">
-                NOTE: please Upload the required documents
-              </p>
-              <label for="staticEmail" class="col-sm-4 col-form-label"
                 >Document Type</label
               >
               <div class="col-sm-8">
@@ -144,7 +135,7 @@
                 >
                   <option value="prescription" selected>Select</option>
                   <option value="prescription">Prescription</option>
-                  <option value="cerificate">certifical</option>
+                  <option value="certificate">Certificate</option>
                   <option value="authcard">Authorization Card</option>
                 </select>
               </div>
@@ -156,14 +147,14 @@
                 Choose File
               </label> -->
                 <input class="form-control" id="formFileSm" type="file" />
-                <button type="button" class="btn btn-danger ms-3">
+                <button type="button" class="btn btn-danger ms-3 px-4">
                   Upload
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div class="row mt-4 smallFont">
+        <div class="row smallFont">
           <div class="col-sm">
             <div class="row py-2">
               <div class="col-sm-4 likeLabel">Original Bill Amount</div>
@@ -209,17 +200,6 @@
                     class="form-check-input"
                     type="radio"
                     name="inlineRadioOptions"
-                    id="inlineRadio1"
-                    value="upi"
-                    [(ngModel)]="selectedPaymentMode"
-                  />
-                  <label class="form-check-label" for="inlineRadio1">UPI</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="inlineRadioOptions"
                     id="inlineRadio2"
                     value="paymentlink"
                     [(ngModel)]="selectedPaymentMode"
@@ -228,36 +208,50 @@
                     >Payment Link</label
                   >
                 </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio1"
+                    value="upi"
+                    [(ngModel)]="selectedPaymentMode"
+                  />
+                  <label class="form-check-label" for="inlineRadio1">UPI</label>
+                </div>
+
                 <br />
                 <ng-container *ngIf="!paymentDoneStatus">
                   <button
                     *ngIf="selectedPaymentMode === 'upi'"
                     type="button"
-                    class="btn btn-danger btn-sm mt-3 w-100"
+                    class="btn btn-danger mt-3 w-100"
                   >
-                    proceed
+                    Proceed
                   </button>
                   <button
                     *ngIf="selectedPaymentMode != 'upi'"
                     type="button"
-                    class="btn btn-danger btn-sm mt-3 w-100"
+                    class="btn btn-danger mt-3 w-100"
                     (click)="paymentLinkSend()"
                   >
                     Send Payment Link
                   </button>
                 </ng-container>
-                <p *ngIf="paymentMSg" class="text-cgreen">{{ paymentMSg }}</p>
+                <p *ngIf="paymentMSg" class="text-cgreen pt-1 m-0">
+                  {{ paymentMSg }}
+                </p>
               </div>
             </div>
             <div class="row py-2" *ngIf="paymentDoneStatus">
               <div class="col-sm-12">
                 <p *ngIf="testReqSent" class="text-cblue">
-                  This Test Has already send
+                  Your booking has been confirmed and send to phlebologist.
                 </p>
                 <button
                   *ngIf="!testReqSent"
                   type="button"
-                  class="btn btn-danger btn-sm mt-3 w-100"
+                  class="btn btn-danger mt-3 w-100"
                   (click)="submitTest()"
                 >
                   Submit

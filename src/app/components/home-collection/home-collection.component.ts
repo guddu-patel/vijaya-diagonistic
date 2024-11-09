@@ -23,7 +23,7 @@ import {
 export class HomeCollectionComponent implements AfterViewInit {
   @ViewChild('addressModalBtnOpen', { static: false })
   openAddModal!: ElementRef;
-  FormMode = false;
+  FormMode = true;
   todayDate = new Date();
 
   doctorList = [
@@ -152,7 +152,7 @@ export class HomeCollectionComponent implements AfterViewInit {
       ageMonth: '0',
       email: 'ranjeeta@example.com',
       alternateMobile: '987*****82',
-      mobile: '9898989898',
+      mobile: '9871111182',
       gender: 'female',
       belongTo: 'self',
       dob: '2002-06-06',

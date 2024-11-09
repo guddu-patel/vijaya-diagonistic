@@ -9,17 +9,15 @@
 
 .patientDetailContainer {
   .colLabel {
-    // color: rgb(10, 183, 176);
-    font-weight: 600;
-    // font-size: 15px;
     margin-top: 10px;
     margin-bottom: 14px;
+    color: $cgreen;
   }
   .card {
     box-shadow: 0 0 0 0.25rem rgba(10, 183, 176, 0.25);
   }
   .card-text {
-    font-weight: 600;
+    // font-weight: 600;
     font-size: 15px;
     margin-bottom: 5px;
   }
@@ -86,12 +84,12 @@
   font-weight: 600;
 }
 h4 {
-  font-weight: 600;
+  // font-weight: 600;
 }
 label,
 .likeLabel {
   color: rgb(10, 183, 176);
-  font-weight: 600;
+  // font-weight: 600;
   font-size: 15px;
 }
 .form-control:focus {
@@ -112,7 +110,7 @@ textarea.form-control {
 .form-check-input:focus {
   box-shadow: 0 0 0 0.25rem rgb(10, 183, 176, 0.25);
 }
-.patientDetail {
+.patientDetailContainer {
   .bookingDetails--addressLabel {
     color: rgb(33, 37, 41);
     position: relative;
@@ -125,9 +123,9 @@ textarea.form-control {
   .patientDetail--patientInfo:after {
     position: absolute;
     right: -15px;
-    top: 30px;
-    height: calc(100% - 70px);
-    width: 2px;
+    top: 15px;
+    height: calc(100% - 45px);
+    width: 1px;
     border-radius: 10px;
     background: rgb(10, 183, 176);
     content: "";
@@ -172,6 +170,7 @@ textarea.form-control {
 .testsTable {
   thead tr th {
     color: $cgreen;
+    font-weight: 400;
   }
   &.table-striped > tbody > tr:nth-child(odd) > td,
   &.table-striped > tbody > tr:nth-child(odd) > th {
@@ -197,9 +196,6 @@ textarea.form-control {
   }
 }
 
-.likeLabelVal {
-  font-weight: 900;
-}
 .tableView {
   margin-top: -3px;
 }

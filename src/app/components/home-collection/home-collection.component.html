@@ -1,6 +1,6 @@
 <ng-container *ngIf="FormMode">
   <div class="container py-4">
-    <h4 class="text-cgreen homeCollection--heading">
+    <h4 class="text-cgreen homeCollection--heading fw-bold">
       Schedule Home Collection Appointment
     </h4>
     <hr />
@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="patientDetail--patientInfo">
-              <h4>Patient Details</h4>
+              <h4 class="homeCollection--sectionHeading">Patient Details</h4>
               <div class="mb-3">
                 <label for="patientDetailInput1" class="form-label"
                   >Enter Patient's Mobile Number</label
@@ -92,9 +92,9 @@
           </div>
           <div class="col-sm-8">
             <div class="patientDetail--bookingDetails">
-              <h4>Booking Details</h4>
+              <h4 class="homeCollection--sectionHeading">Booking Details</h4>
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6 mb-3">
                   <div class="mb-3">
                     <label class="form-label">Prescribed By(Doctor)</label>
                     <ng-select
@@ -187,10 +187,35 @@
                       </div>
                     </div>
                   </div>
-                  <div class="mb-3">
+                  <div
+                    class="mb-3"
+                    style="margin-top: -8px"
+                    *ngIf="!homeCollectionData.sameAsParmanentAdd"
+                  >
                     <label class="form-label" (click)="editAddress()">
                       Add Address <i class="bi bi-pencil-square"></i>
                     </label>
+                  </div>
+                </div>
+                <div
+                  class="col-sm-12"
+                  *ngIf="homeCollectionData.selectedDeliveryAddress"
+                >
+                  <div class="">
+                    <h4 class="homeCollection--sectionHeading">
+                      Last 4 Test Details
+                    </h4>
+                    <ol class="list-group list-group-numbered list-group-flush">
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-start ps-0"
+                        *ngFor="let oldTest of availableTests | slice : 2"
+                      >
+                        <div class="ms-2 me-auto">
+                          <div class="text-cgreen">{{ oldTest.testName }}</div>
+                          <small class="text-muted">2020-Jun-23</small>
+                        </div>
+                      </li>
+                    </ol>
                   </div>
                 </div>
               </div>
@@ -203,7 +228,9 @@
     <div class="patientDetailContainer">
       <div class="row border pt-1 mt-3 mx-0">
         <div class="col-4 my-auto">
-          <h4>Add Diagonistic Test</h4>
+          <h4 class="homeCollection--sectionHeading m-0">
+            Add Diagonistic Test
+          </h4>
         </div>
         <div class="col-4"></div>
         <div class="col-4">
@@ -229,7 +256,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let test of testsSelected; let i = index">
-                <th scope="row">{{ i + 1 }}</th>
+                <td scope="row">{{ i + 1 }}</td>
                 <td>{{ test.testName }}</td>
                 <td>{{ test.price }}</td>
                 <td class="text-center">
@@ -240,7 +267,7 @@
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
                     title="Remove Test"
-                    class="bi bi-x-circle-fill text-danger"
+                    class="bi bi-x-lg text-danger"
                     role="button"
                     (click)="removeTest(i)"
                   ></i>
@@ -256,8 +283,8 @@
         </div>
       </div>
       <div class="slotContainer mt-3">
-        <h4 class="text-cgreen">Select Slot</h4>
-        <p class="slotInfo">
+        <h4 class="homeCollection--sectionHeading">Select Slot</h4>
+        <p class="slotInfo fst-italic">
           Slot can be booked only for 30 days from current date(If
           Available)<span class="text-danger">*</span>
         </p>
